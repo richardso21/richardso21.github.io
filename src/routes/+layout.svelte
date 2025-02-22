@@ -1,29 +1,25 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
-	import { onNavigate } from '$app/navigation';
 	import '../app.css';
+	import { onMount } from 'svelte';
 	import { fly } from 'svelte/transition';
 	import { circOut } from 'svelte/easing';
+	import * as THREE from 'three';
+	// @ts-ignore
+	import WAVES from 'vanta/dist/vanta.waves.min';
+
 	let mounted = $state(false);
 	onMount(() => {
-		// @ts-ignore
-		VANTA.WAVES({
+		WAVES({
 			el: '#vanta-bg',
 			color: 0x040e1e,
-			shininess: 0
+			shininess: 0,
+			THREE: THREE
 		});
 		mounted = true;
 	});
+
 	let { data, children } = $props();
-
-	onNavigate((e) => {});
 </script>
-
-<svelte:head>
-	<!-- import cdns for vanta background -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/vanta/dist/vanta.waves.min.js"></script>
-</svelte:head>
 
 <div
 	id="vanta-bg"
@@ -32,7 +28,7 @@
 ></div>
 <div class="transition-container relative overflow-hidden">
 	{#key data.pathname}
-		<main class="m:px-6 px-12" transition:fly={{ x: -100, duration: 300, easing: circOut }}>
+		<main class="m:px-6 px-12" transition:fly={{ x: -100, duration: 200, easing: circOut }}>
 			{@render children()}
 		</main>
 	{/key}

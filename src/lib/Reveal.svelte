@@ -1,5 +1,6 @@
 <script>
 	import { onMount } from 'svelte';
+	import { inview } from 'svelte-inview';
 	import { Motion, useAnimation } from 'svelte-motion';
 
 	let {
@@ -16,10 +17,19 @@
 
 	let mainControls = useAnimation();
 
-	onMount(async () => {
-		await mainControls.start('visible');
+	// onMount(async () => {
+	// 	await mainControls.start('visible');
+	// 	revealed = true;
+	// });
+
+	let viewEnter = () => {
+		mainControls.start('visible');
 		revealed = true;
-	});
+	};
+	let viewLeave = () => {
+		mainControls.start('hidden');
+		revealed = false;
+	};
 </script>
 
 <div
@@ -27,6 +37,9 @@
 		? 'pointer-events-auto'
 		: 'pointer-events-none'}"
 	style="width:{width}"
+	use:inview
+	oninview_enter={viewEnter}
+	oninview_leave={viewLeave}
 >
 	<Motion
 		let:motion

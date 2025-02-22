@@ -8,7 +8,3 @@
 	color: white;
 	background-color: #111827;
 }
-
-a {
-	@apply underline underline-offset-2 transition ease-out active:scale-110 active:text-blue-400;
-}
