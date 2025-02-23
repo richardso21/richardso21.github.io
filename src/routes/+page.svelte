@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { Motion } from 'svelte-motion';
+	// import { Motion } from 'svelte-motion';
+	// import Reveal from '$lib/RevealOld.svelte';
 	import Reveal from '$lib/Reveal.svelte';
 
 	const DELAY_STAGGER = 0.05;
@@ -55,9 +56,7 @@
 
 <div class="flex h-screen flex-col justify-center">
 	<Reveal duration={0.35}>
-		<Motion let:motion>
-			<h1 use:motion class="text-6xl font-bold text-white sm:text-8xl md:text-9xl">Richard So</h1>
-		</Motion>
+		<h1 class="text-6xl font-bold text-white sm:text-8xl md:text-9xl">Richard So</h1>
 	</Reveal>
 	<Reveal delay={DELAY_STAGGER * 3}>
 		<h3 class="pt-2 text-xl italic text-gray-400 sm:pt-0 md:text-2xl">
@@ -69,7 +68,7 @@
 	</Reveal>
 	<div class={link_container_tw}>
 		{#each site_links as link, i}
-			<Reveal delay={DELAY_STAGGER * (i + 5)} className={anim_link_tw} layoutId={link.href}>
+			<Reveal delay={DELAY_STAGGER * (i + 5)} className={anim_link_tw}>
 				<a href={link.href}>{link.text}</a>
 			</Reveal>
 		{/each}
@@ -77,11 +76,7 @@
 			<hr class="mt-2 w-32 border-gray-600 sm:w-48" />
 		</Reveal>
 		{#each external_links as link, i}
-			<Reveal
-				delay={DELAY_STAGGER * (i + 6 + site_links.length)}
-				className={anim_link_tw}
-				layoutId={link.href}
-			>
+			<Reveal delay={DELAY_STAGGER * (i + 6 + site_links.length)} className={anim_link_tw}>
 				<a href={link.href} target="_blank">{link.text}</a>
 			</Reveal>
 		{/each}
