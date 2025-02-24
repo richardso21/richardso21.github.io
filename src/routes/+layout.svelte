@@ -1,4 +1,5 @@
 <script lang="ts">
+	import '@fontsource-variable/inconsolata';
 	import '../app.css';
 	import { onMount } from 'svelte';
 	import { fly } from 'svelte/transition';
@@ -35,6 +36,13 @@
 </div>
 
 <style>
+	:root {
+		font-family: 'Inconsolata Variable', monospace;
+		font-display: swap;
+		color: white;
+		background-color: #111827;
+	}
+
 	/* resolves issue with overlapping elements during transitions */
 	.transition-container {
 		display: grid;

@@ -1,6 +1,9 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
-	import { gsap } from 'gsap';
+	// import { Motion } from 'svelte-motion';
+	// import Reveal from '$lib/RevealOld.svelte';
+	import Reveal from '$lib/Reveal.svelte';
+
+	const DELAY_STAGGER = 0.05;
 
 	const anim_link_tw =
 		'transition ease-out hover:animate-pulse hover:scale-125 hover:skew-x-12 active:text-blue-400 active:scale-110 cursor-pointer';
@@ -37,27 +40,6 @@
 			text: 'GitHub'
 		}
 	];
-
-	const reveal_before = {
-		y: 150,
-		autoAlpha: 0
-	};
-
-	const reveal_after = {
-		y: 0,
-		autoAlpha: 1,
-		ease: 'circ.out',
-		stagger: 0.05,
-		duration: 0.5
-	};
-
-	onMount(async () => {
-		gsap.fromTo('.gsap-reveal-first', { ...reveal_before, y: 250 }, reveal_after);
-		gsap.fromTo('.gsap-reveal', reveal_before, {
-			...reveal_after,
-			delay: 0.3
-		});
-	});
 </script>
 
 <svelte:head>
@@ -73,35 +55,33 @@
 </svelte:head>
 
 <div class="flex h-screen flex-col justify-center">
-	<h1 class="gsap-reveal-first text-6xl font-bold text-white sm:text-8xl md:text-9xl">
-		Richard So
-	</h1>
-	<h3 class="gsap-reveal pt-2 text-xl text-gray-400 italic sm:pt-0 md:text-2xl">
-		AI/ML, Cloud, Full Stack, all things code
-	</h3>
-	<hr class="gsap-reveal my-8 w-60 sm:w-96" />
+	<!-- <RevealGroup>
+		<h1 class="text-6xl font-bold text-white sm:text-8xl md:text-9xl">Richard So</h1>
+	</RevealGroup> -->
+	<Reveal duration={0.35}>
+		<h1 class="text-6xl font-bold text-white sm:text-8xl md:text-9xl">Richard So</h1>
+	</Reveal>
+	<Reveal delay={DELAY_STAGGER * 3}>
+		<h3 class="pt-2 text-xl text-gray-400 italic sm:pt-0 md:text-2xl">
+			AI/ML, Cloud, Full Stack, all things code
+		</h3>
+	</Reveal>
+	<Reveal delay={DELAY_STAGGER * 4}>
+		<hr class="my-8 w-60 sm:w-96" />
+	</Reveal>
 	<div class={link_container_tw}>
-		{#each site_links as link}
-			<div class="gsap-reveal">
-				<div class={anim_link_tw}>
-					<a href={link.href}>{link.text}</a>
-				</div>
-			</div>
+		{#each site_links as link, i}
+			<Reveal delay={DELAY_STAGGER * (i + 5)} className={anim_link_tw}>
+				<a href={link.href}>{link.text}</a>
+			</Reveal>
 		{/each}
-		<hr class="gsap-reveal mt-2 w-32 border-gray-600 sm:w-48" />
-		{#each external_links as link}
-			<div class="gsap-reveal">
-				<div class={anim_link_tw}>
-					<a href={link.href} target="_blank">{link.text}</a>
-				</div>
-			</div>
+		<Reveal delay={DELAY_STAGGER * (5 + site_links.length)}>
+			<hr class="mt-2 w-32 border-gray-600 sm:w-48" />
+		</Reveal>
+		{#each external_links as link, i}
+			<Reveal delay={DELAY_STAGGER * (i + 6 + site_links.length)} className={anim_link_tw}>
+				<a href={link.href} target="_blank">{link.text}</a>
+			</Reveal>
 		{/each}
 	</div>
 </div>
-
-<style>
-	.gsap-reveal,
-	.gsap-reveal-first {
-		visibility: hidden;
-	}
-</style>
