@@ -47,11 +47,13 @@
 </svelte:head>
 
 <div class="m:px-6 flex h-screen flex-col justify-center px-12">
-	<h1 class="gsap-reveal-first text-6xl font-bold text-white sm:text-8xl md:text-9xl">
+	<h1 class="gsap-reveal-first text-5xl font-bold text-white sm:text-8xl md:text-9xl">
 		Richard So
 	</h1>
 	<h3 class="gsap-reveal pt-2 text-xl text-gray-400 italic sm:pt-0 md:text-2xl">
-		AI/ML, Cloud, Full Stack, all things code
+		AI/ML, Cloud, Full Stack,
+		<br class="block sm:hidden" />
+		all things code
 	</h3>
 	<hr class="gsap-reveal my-8 w-60 sm:w-96" />
 	<div class={link_container_tw}>

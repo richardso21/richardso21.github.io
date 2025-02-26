@@ -5,6 +5,8 @@ export const load = ({ url }) => {
 		switch (pathname) {
 			case '/':
 				return 1;
+			case '/resume':
+				return 0.75;
 			default:
 				return 1.5;
 		}
