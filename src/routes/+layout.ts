@@ -1,7 +1,17 @@
 export const load = ({ url }) => {
 	const { pathname } = url;
 
+	const vanta_zoom = (): number => {
+		switch (pathname) {
+			case '/':
+				return 1;
+			default:
+				return 1.5;
+		}
+	};
+
 	return {
-		pathname
+		pathname,
+		vanta_zoom
 	};
 };

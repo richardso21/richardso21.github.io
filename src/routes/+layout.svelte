@@ -2,24 +2,35 @@
 	import '@fontsource-variable/inconsolata';
 	import '../app.css';
 	import { onMount } from 'svelte';
-	import { fly } from 'svelte/transition';
-	import { circOut } from 'svelte/easing';
+	import { blur } from 'svelte/transition';
 	import * as THREE from 'three';
 	// @ts-ignore
 	import WAVES from 'vanta/dist/vanta.waves.min';
 
-	let mounted = $state(false);
-	onMount(() => {
-		WAVES({
-			el: '#vanta-bg',
-			color: 0x040e1e,
-			shininess: 0,
-			THREE: THREE
-		});
-		mounted = true;
-	});
+	import { afterNavigate } from '$app/navigation';
 
 	let { data, children } = $props();
+
+	let mounted = $state(false);
+
+	let vanta_effect: WAVES;
+	onMount(() => {
+		mounted = true;
+		vanta_effect = WAVES({
+			el: '#vanta-bg',
+			color: 0x060f1f,
+			shininess: 10,
+			THREE: THREE
+		});
+	});
+
+	afterNavigate(() => {
+		const zoom = data.vanta_zoom();
+		vanta_effect.setOptions({ zoom });
+		setTimeout(() => {
+			vanta_effect.triggerMouseMove();
+		}, 100);
+	});
 </script>
 
 <div
@@ -29,7 +40,7 @@
 ></div>
 <div class="transition-container relative overflow-hidden">
 	{#key data.pathname}
-		<main class="m:px-6 px-12" transition:fly={{ x: -100, duration: 200, easing: circOut }}>
+		<main transition:blur={{ duration: 500 }}>
 			{@render children()}
 		</main>
 	{/key}

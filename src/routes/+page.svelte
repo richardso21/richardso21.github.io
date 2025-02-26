@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
+	import { onDestroy, onMount } from 'svelte';
 	import { gsap } from 'gsap';
 
 	const anim_link_tw =
@@ -7,39 +7,8 @@
 	const link_container_tw =
 		'child:pb-5 child:self-start mb-5 flex flex-col text-2xl italic underline decoration-gray-300 underline-offset-2 sm:text-3xl';
 
-	type LinkMetaData = {
-		href: string;
-		text: string;
-	};
-
-	let site_links: Array<LinkMetaData> = [
-		{
-			href: '/experience',
-			text: 'Experience'
-		},
-		{
-			href: '/projects',
-			text: 'Projects'
-		},
-		{
-			href: '/resume',
-			text: 'Resume'
-		}
-	];
-
-	let external_links: Array<LinkMetaData> = [
-		{
-			href: 'https://www.linkedin.com/in/richardso21',
-			text: 'LinkedIn'
-		},
-		{
-			href: 'https://github.com/richardso21',
-			text: 'GitHub'
-		}
-	];
-
 	const reveal_before = {
-		y: 150,
+		y: 100,
 		autoAlpha: 0
 	};
 
@@ -51,13 +20,18 @@
 		duration: 0.5
 	};
 
-	onMount(async () => {
-		gsap.fromTo('.gsap-reveal-first', { ...reveal_before, y: 250 }, reveal_after);
-		gsap.fromTo('.gsap-reveal', reveal_before, {
-			...reveal_after,
-			delay: 0.3
-		});
+	const tl = gsap.timeline();
+
+	onMount(() => {
+		tl.fromTo('.gsap-reveal-first', { ...reveal_before, y: 200 }, reveal_after);
+		tl.fromTo('.gsap-reveal', reveal_before, reveal_after, '-=15%');
 	});
+	onDestroy(() => {
+		tl.kill();
+	});
+
+	const { data } = $props();
+	const { site_links, external_links } = data;
 </script>
 
 <svelte:head>
@@ -72,7 +46,7 @@
 	<meta name="og:type" content="profile" />
 </svelte:head>
 
-<div class="flex h-screen flex-col justify-center">
+<div class="m:px-6 flex h-screen flex-col justify-center px-12">
 	<h1 class="gsap-reveal-first text-6xl font-bold text-white sm:text-8xl md:text-9xl">
 		Richard So
 	</h1>
