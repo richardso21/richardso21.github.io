@@ -46,7 +46,7 @@
 	<meta name="og:type" content="profile" />
 </svelte:head>
 
-<div class="m:px-6 flex h-screen flex-col justify-center px-12">
+<div class="flex min-h-screen flex-col justify-center py-20">
 	<h1 class="gsap-reveal-first text-5xl font-bold text-white sm:text-8xl md:text-9xl">
 		Richard So
 	</h1>

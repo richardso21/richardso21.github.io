@@ -6,13 +6,13 @@ export const load = ({ url }) => {
 			case '/':
 				return 1;
 			case '/resume-frame':
-				return 0.7;
+				return 0.5;
 			case '/experience':
-				return 1.35;
-			case '/projects':
-				return 0.85;
-			default:
 				return 1.5;
+			case '/projects':
+				return 1.25;
+			default:
+				return 1.75;
 		}
 	};
 

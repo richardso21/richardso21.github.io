@@ -40,7 +40,7 @@
 ></div>
 <div class="transition-container relative overflow-hidden">
 	{#key data.pathname}
-		<main transition:blur={{ duration: 500 }}>
+		<main class="child:py-24 px-8 sm:px-12" transition:blur={{ duration: 500 }}>
 			{@render children()}
 		</main>
 	{/key}

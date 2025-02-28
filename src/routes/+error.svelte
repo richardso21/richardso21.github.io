@@ -15,11 +15,11 @@
 </script>
 
 <div
-	class="relative h-screen w-screen transition-colors delay-500 duration-[2s] {mounted
+	class="fixed top-0 left-0 z-10 h-screen w-screen transition-colors delay-500 duration-[2s] {mounted
 		? 'bg-red-950'
 		: 'bg-[#111827]'}"
 >
-	<div class="reveal flex h-screen w-screen flex-col items-center justify-center">
+	<div class="reveal flex h-full w-full flex-col items-center justify-center">
 		<h1 class="text-9xl font-bold italic">{page.status}</h1>
 		<h2 class="w-auto text-center sm:w-1/3">{page.error?.message}</h2>
 	</div>
