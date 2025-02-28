@@ -13,7 +13,7 @@ const site_links: Array<LinkMetaData> = [
 		text: 'Projects'
 	},
 	{
-		href: '/resume',
+		href: '/resume-frame',
 		text: 'Resume'
 	}
 ];

@@ -19,7 +19,7 @@
 		vanta_effect = WAVES({
 			el: '#vanta-bg',
 			color: 0x060f1f,
-			shininess: 10,
+			shininess: 7.5,
 			THREE: THREE
 		});
 	});
