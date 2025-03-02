@@ -2,6 +2,9 @@
 	import { onDestroy, onMount } from 'svelte';
 	import { gsap } from 'gsap';
 
+	const { data } = $props();
+	const { site_links, external_links } = data;
+
 	const anim_link_tw =
 		'transition ease-out hover:animate-pulse hover:scale-125 hover:skew-x-12 active:text-blue-400 active:scale-110 cursor-pointer';
 	const link_container_tw =
@@ -29,9 +32,6 @@
 	onDestroy(() => {
 		tl.kill();
 	});
-
-	const { data } = $props();
-	const { site_links, external_links } = data;
 </script>
 
 <svelte:head>
