@@ -4,20 +4,40 @@
 	import ExperienceItem from './ExperienceItem.svelte';
 	import type { ExperienceMetaData } from './experience';
 
-	let { experiences }: { experiences: Array<ExperienceMetaData> } = $props();
-	let child_tl = Array<ExperienceItem>(experiences.length);
+	let {
+		experiences,
+		tl = $bindable()
+	}: { experiences: Array<ExperienceMetaData>; tl: gsap.core.Timeline } = $props();
+	let child_tl = $state<Array<gsap.core.Timeline>>(Array(experiences.length));
 
-	const tl = gsap.timeline();
+	tl = tl ?? gsap.timeline();
 	onMount(() => {
-		child_tl.forEach((el) => el.state());
+		tl.fromTo('.explist', { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.35 });
+		child_tl.forEach((el) => tl.add(el, '-=65%'));
+		tl.fromTo(
+			'.line',
+			{ height: 0, autoAlpha: 0 },
+			{ height: '100%', autoAlpha: 1, duration: 1, ease: 'circ.inOut' },
+			0
+		);
 	});
 </script>
 
-<div class="flex flex-row px-2 sm:px-12">
-	<div class="line relative border-l border-gray-500"></div>
-	<ol class="">
-		{#each experiences as experience, i}
-			<ExperienceItem bind:this={child_tl[i]} {experience} />
-		{/each}
-	</ol>
+<div class="explist">
+	<div class="flex flex-row px-2 sm:px-12">
+		<div class="relative">
+			<div class="line h-full border-l border-gray-500"></div>
+		</div>
+		<ol class="">
+			{#each experiences as experience, key}
+				<ExperienceItem bind:tl={child_tl[key]} {experience} {key} />
+			{/each}
+		</ol>
+	</div>
 </div>
+
+<style>
+	.explist {
+		visibility: hidden;
+	}
+</style>
