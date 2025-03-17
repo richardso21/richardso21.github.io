@@ -8,6 +8,7 @@
 	import WAVES from 'vanta/dist/vanta.waves.min';
 
 	import { afterNavigate } from '$app/navigation';
+	import Nav from '$lib/Nav.svelte';
 
 	let { data, children } = $props();
 
@@ -39,8 +40,9 @@
 		(mounted ? 'opacity-100' : 'opacity-0')}
 ></div>
 <div class="transition-container relative overflow-hidden">
+	<Nav />
 	{#key data.pathname}
-		<main class="child:py-24 px-8 sm:px-12" transition:blur={{ duration: 500 }}>
+		<main class="child:py-24 px-8 sm:px-12" transition:blur={{ duration: 300 }}>
 			{@render children()}
 		</main>
 	{/key}
