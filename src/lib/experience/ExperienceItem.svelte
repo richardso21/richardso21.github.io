@@ -2,12 +2,18 @@
 	import { onMount } from 'svelte';
 	import { gsap } from 'gsap';
 	import type { ExperienceMetaData } from './experience';
+	import { marked } from 'marked';
 
 	let {
 		experience,
 		key,
 		tl = $bindable()
 	}: { experience: ExperienceMetaData; key: number; tl: gsap.core.Timeline } = $props();
+
+	const { details } = experience;
+	const experience_details = Array.isArray(details)
+		? details.map((el) => `* ${el}`).join('\n')
+		: details;
 
 	const getDateString = (date: Date) =>
 		date.toLocaleDateString('default', { month: 'long', year: 'numeric' });
@@ -38,7 +44,11 @@
 	</div>
 	<div class="experience-item-{key}">
 		<div class="text-lg font-light text-gray-400 italic sm:text-xl">
-			{getDateString(experience.start)} - {getDateString(experience.end)}
+			{#if experience.end !== undefined}
+				{getDateString(experience.start)} - {getDateString(experience.end)}
+			{:else}
+				{getDateString(experience.start)}
+			{/if}
 		</div>
 		<div class="text-3xl font-bold text-white sm:text-5xl">
 			{experience.org}
@@ -46,16 +56,10 @@
 		<div class="pt-2 text-2xl text-blue-300 sm:text-4xl">
 			{experience.role}
 		</div>
-		<div class="pt-5 text-xl text-gray-300 sm:text-2xl">
-			{#if typeof experience.details === 'string'}
-				{experience.details}
-			{:else}
-				<ul class="leading-relaxed">
-					{#each experience.details as detail}
-						<li class="list-disc pb-2">{detail}</li>
-					{/each}
-				</ul>
-			{/if}
+		<div
+			class="pt-5 text-xl text-gray-300 sm:text-2xl [&_li]:list-disc [&_li]:pb-2 [&_ul]:leading-relaxed"
+		>
+			{@html marked.parse(experience_details)}
 		</div>
 	</div>
 </li>
