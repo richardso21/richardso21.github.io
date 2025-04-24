@@ -6,7 +6,7 @@ export const load = ({ url }) => {
 			case '/':
 				return 1;
 			case '/resume-frame':
-				return 0.5;
+				return 1;
 			case '/experience':
 				return 1.5;
 			case '/projects':

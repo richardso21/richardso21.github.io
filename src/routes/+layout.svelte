@@ -4,16 +4,22 @@
 	import { onMount } from 'svelte';
 	import { blur } from 'svelte/transition';
 	import * as THREE from 'three';
+	import { gsap } from 'gsap';
+	import { Flip } from 'gsap/Flip';
 	// @ts-ignore
 	import WAVES from 'vanta/dist/vanta.waves.min';
 
-	import { afterNavigate } from '$app/navigation';
+	import { afterNavigate, beforeNavigate } from '$app/navigation';
 	import Nav from '$lib/Nav.svelte';
+	import { flipState } from '$lib/FlipState.svelte';
+
+	gsap.registerPlugin(Flip);
 
 	let { data, children } = $props();
 
 	let mounted = $state(false);
 
+	// init vanta effect
 	let vanta_effect: WAVES;
 	onMount(() => {
 		mounted = true;
@@ -25,12 +31,31 @@
 		});
 	});
 
+	beforeNavigate((nav) => {
+		if (!nav.to) return;
+		const target = `[data-flip-id='${nav.to.route.id}']`;
+		flipState.set(Flip.getState(target), target);
+	});
+
 	afterNavigate(() => {
+		// we need to manually trigger mousemove to update the zoom
 		const zoom = data.vanta_zoom();
 		vanta_effect.setOptions({ zoom });
 		setTimeout(() => {
 			vanta_effect.triggerMouseMove();
 		}, 100);
+
+		// check if we need to flip anything
+		if (flipState.active) {
+			const currFlipState = flipState.get();
+			Flip.from(currFlipState.currentState as Flip.FlipState, {
+				targets: currFlipState.target,
+				duration: currFlipState.duration,
+				// ease: 'elastic.out(1, 1)',
+				ease: 'circ.inOut',
+				scale: true
+			});
+		}
 	});
 </script>
 
@@ -42,7 +67,11 @@
 <div class="transition-container relative overflow-hidden">
 	<Nav />
 	{#key data.pathname}
-		<main class="child:py-24 px-8 sm:px-12" transition:blur={{ duration: 300 }}>
+		<main
+			class="child:py-24 px-8 sm:px-12"
+			out:blur={{ duration: 300 }}
+			in:blur={{ duration: data.pathname !== '/resume-frame' ? 0 : 300 }}
+		>
 			{@render children()}
 		</main>
 	{/key}
