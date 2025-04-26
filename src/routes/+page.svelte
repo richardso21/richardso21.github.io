@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onDestroy, onMount } from 'svelte';
 	import { gsap } from 'gsap';
+	import { flipState } from '$lib/FlipState.svelte.js';
 
 	const { data } = $props();
 	const { site_links, external_links } = data;
@@ -26,6 +27,12 @@
 	const tl = gsap.timeline();
 
 	onMount(() => {
+		if (flipState.active) {
+			const { target } = flipState.get();
+			// if we're flipping one of the links, remove the gsap-reveal class to allow the flip animation to play
+			const el = document.querySelector(`.gsap-reveal ${target}`)?.parentElement?.parentElement;
+			if (el) el.classList.remove('gsap-reveal');
+		}
 		tl.fromTo('.gsap-reveal-first', { ...reveal_before, y: 200 }, reveal_after);
 		tl.fromTo('.gsap-reveal', reveal_before, reveal_after, '-=15%');
 	});

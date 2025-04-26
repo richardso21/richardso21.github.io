@@ -32,9 +32,14 @@
 	});
 
 	beforeNavigate((nav) => {
-		if (!nav.to) return;
-		const target = `[data-flip-id='${nav.to.route.id}']`;
-		flipState.set(Flip.getState(target), target);
+		// store a flip state from a previously navigated page
+		if (!nav.to || !nav.from) return;
+		if ([nav.to.route.id, nav.from.route.id].includes('/resume-frame')) return;
+		const fromHome = nav.from.route.id === '/';
+		const flipId = fromHome ? nav.to.route.id : nav.from.route.id;
+		const target = `[data-flip-id='${flipId}']`;
+		// set a different duration for the flip depending on the direction of the page transition
+		flipState.set(Flip.getState(target), target, fromHome ? 0.4 : 0.7);
 	});
 
 	afterNavigate(() => {
@@ -51,10 +56,12 @@
 			Flip.from(currFlipState.currentState as Flip.FlipState, {
 				targets: currFlipState.target,
 				duration: currFlipState.duration,
-				// ease: 'elastic.out(1, 1)',
 				ease: 'circ.inOut',
 				scale: true
 			});
+			// afterNavigate should be invoked last (after onMounts), so we can assume
+			// flip has been completed and we can reset its state
+			flipState.reset();
 		}
 	});
 </script>

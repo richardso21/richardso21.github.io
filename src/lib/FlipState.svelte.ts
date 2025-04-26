@@ -7,27 +7,23 @@ class FlipState {
 		return this.currentState !== undefined;
 	}
 
-	set = (state: Flip.FlipState, target: string, duration?: number) => {
+	set = (state: Flip.FlipState, target: string, duration: number = 0.4) => {
 		this.currentState = state;
 		this.target = target;
-		this.duration = duration ?? this.duration;
+		this.duration = duration;
 	};
 
 	// once consumed, we must reset the state
-	get = () => {
-		const res = {
-			currentState: this.currentState,
-			target: this.target,
-			duration: this.duration
-		};
-		this.reset();
-		return res;
-	};
+	get = () => ({
+		currentState: this.currentState,
+		target: this.target,
+		duration: this.duration
+	});
 
 	reset = () => {
 		this.currentState = undefined;
 		this.target = '';
-		this.duration = 0.4;
+		this.duration = 0.4; // default duration
 	};
 }
 
