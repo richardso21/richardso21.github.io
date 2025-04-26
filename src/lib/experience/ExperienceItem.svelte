@@ -41,6 +41,15 @@
 		class="experience-item-{key}-img absolute left-4 h-12 w-12 scale-125 sm:left-14 sm:h-20 sm:w-20"
 	>
 		<img src="/experience/{experience.icon}" alt={experience.org} />
+		{#if experience.iconBackdrop}
+			<svg
+				class="absolute top-0 left-0 -z-50 h-full w-full drop-shadow-xl"
+				viewBox="0 0 20 20"
+				shape-rendering="geometricPrecision"
+			>
+				<circle cx="10" cy="10" r="10" fill={experience.iconBackdrop} />
+			</svg>
+		{/if}
 	</div>
 	<div class="experience-item-{key}">
 		<div class="text-lg font-light text-gray-400 italic sm:text-xl">
@@ -50,14 +59,14 @@
 				{getDateString(experience.start)}
 			{/if}
 		</div>
-		<div class="text-3xl font-bold text-white sm:text-5xl">
+		<div class="text-2xl font-bold text-white sm:text-5xl">
 			{experience.org}
 		</div>
-		<div class="pt-2 text-2xl text-blue-300 sm:text-4xl">
+		<div class="text-xl text-blue-300 italic sm:pt-2 sm:text-4xl">
 			{experience.role}
 		</div>
 		<div
-			class="pt-5 text-xl text-gray-300 sm:text-2xl [&_li]:list-disc [&_li]:pb-2 [&_ul]:leading-relaxed"
+			class="pt-5 text-lg text-gray-300 sm:text-2xl [&_li]:list-disc [&_li]:pb-2 [&_ul]:leading-relaxed"
 		>
 			{@html marked.parse(experience_details)}
 		</div>

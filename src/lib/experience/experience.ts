@@ -5,4 +5,5 @@ export type ExperienceMetaData = {
 	end?: Date;
 	details: string | Array<string>;
 	icon: string;
+	iconBackdrop?: string;
 };
