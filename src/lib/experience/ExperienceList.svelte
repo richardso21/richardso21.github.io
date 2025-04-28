@@ -28,7 +28,7 @@
 		<div class="relative">
 			<div class="line h-full border-l border-gray-500"></div>
 		</div>
-		<ol class="">
+		<ol class="max-w-[1500px]">
 			{#each experiences as experience, key}
 				<ExperienceItem bind:tl={child_tl[key]} {experience} {key} />
 			{/each}

@@ -1,6 +1,24 @@
+import { anim_link_tw } from '$lib/animLink';
 import type { ExperienceMetaData } from '$lib/experience/experience';
 
+const link = (text: string, href: string) =>
+	`<a class="inline-block underline ${anim_link_tw}" href="${href}" target="_blank">${text}</a>`;
+
 const experiences: Array<ExperienceMetaData> = [
+	{
+		org: 'D2I Lab @ Georgia Tech',
+		role: 'Researcher',
+		start: new Date(2025, 0),
+		icon: 'd2i.png',
+		iconBackdrop: 'white',
+		details: [
+			'Experimented new schemes for **faster, scalable LLM inference** in **retrieval-augmented generation** (RAG) workloads.',
+			`Devised an **agentic web retrieval system** via reverse-engineering from SoTA commercial Deep Research products
+			_(e.g. **OpenAI, Grok, Perplexity**, etc.)_.`,
+			`Under the supervision of ${link('Dr. Kexin Rong', 'https://kexinrong.github.io/')} and
+			${link('Rajveer Bachkaniwala', 'https://www.rajveerbachkaniwala.com/')}.`
+		]
+	},
 	{
 		org: 'Amazon Web Services',
 		role: 'SWE Intern',
@@ -15,6 +33,18 @@ const experiences: Array<ExperienceMetaData> = [
 		]
 	},
 	{
+		org: 'Georgia Tech College of Computing',
+		role: 'Senior Teaching Assistant',
+		start: new Date(2023, 0),
+		end: new Date(2024, 4),
+		icon: 'gt.png',
+		iconBackdrop: 'white',
+		details: [
+			'Lectured biweekly to 50+ students on computer architecture foundations, the C language, and memory allocation concepts.',
+			`Developed unit testing suites, docker images for auto-grading, and ${link('course software', 'https://github.com/gt-cs2110')} for **1000+ students per semester**.`
+		]
+	},
+	{
 		org: 'Tanium',
 		role: 'SWE Intern',
 		start: new Date(2023, 5),
@@ -26,30 +56,7 @@ const experiences: Array<ExperienceMetaData> = [
 			'Rapidly tackled **50+ feature/bug tickets** within a 10-week internship maintaining a Knex.js and React TypeScript codebase.',
 			'Exercised test-driven development and data validation best practices using Jest, Jasmine, and Joi.'
 		]
-	},
-	{
-		org: 'Georgia Tech College of Computing',
-		role: 'Senior Teaching Assistant',
-		start: new Date(2023, 0),
-		end: new Date(2024, 4),
-		icon: 'gt.png',
-		iconBackdrop: 'white',
-		details: [
-			'Lectured biweekly to 50+ students on computer architecture foundations, the C language, and memory allocation concepts.',
-			'Developed unit testing suites, docker images for auto-grading, and course software for **1000+ students per semester**.'
-		]
 	}
-	/* {
-		org: 'Amazon Web Services',
-		role: 'Software Engineer',
-		start: new Date(2024, 4),
-		end: new Date(2024, 7),
-		icon: 'amazon.png',
-		details: [
-			'Developed a serverless application using AWS Lambda and API Gateway to provide a RESTful API for a mobile app.',
-			'Developed a serverless application using AWS Lambda and API Gateway to provide a RESTful API for a mobile app.'
-		]
-	} */
 ];
 
 export async function load() {

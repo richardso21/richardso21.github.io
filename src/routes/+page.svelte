@@ -2,12 +2,11 @@
 	import { onDestroy, onMount } from 'svelte';
 	import { gsap } from 'gsap';
 	import { flipState } from '$lib/FlipState.svelte.js';
+	import { anim_link_hero_tw } from '$lib/animLink.js';
 
 	const { data } = $props();
 	const { site_links, external_links } = data;
 
-	const anim_link_tw =
-		'transition ease-out -skew-x-12 hover:animate-pulse hover:scale-125 hover:skew-x-0 active:text-blue-400 active:scale-110 cursor-pointer';
 	const link_container_tw =
 		'child:pb-5 child:self-start mb-5 flex flex-col text-2xl decoration-gray-300 underline-offset-2 sm:text-3xl';
 
@@ -66,7 +65,7 @@
 	<div class={link_container_tw}>
 		{#each site_links as link}
 			<div class="gsap-reveal">
-				<div class={anim_link_tw}>
+				<div class={anim_link_hero_tw}>
 					<a href={link.href} data-flip-id={link.href} class="inline-block underline">{link.text}</a
 					>
 				</div>
@@ -75,7 +74,7 @@
 		<hr class="gsap-reveal mt-2 w-32 border-gray-600 sm:w-48" />
 		{#each external_links as link}
 			<div class="gsap-reveal">
-				<div class={anim_link_tw}>
+				<div class={anim_link_hero_tw}>
 					<a href={link.href} target="_blank" class="inline-block underline">
 						{link.text}
 					</a>

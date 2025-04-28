@@ -57,7 +57,8 @@
 				targets: currFlipState.target,
 				duration: currFlipState.duration,
 				ease: 'circ.inOut',
-				scale: true
+				scale: true,
+				toggleClass: 'pointer-events-none'
 			});
 			// afterNavigate should be invoked last (after onMounts), so we can assume
 			// flip has been completed and we can reset its state

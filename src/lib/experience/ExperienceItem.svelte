@@ -36,11 +36,11 @@
 	export const get_tl = () => tl;
 </script>
 
-<li class="pb-20 pl-10 sm:pl-20">
+<li class="pb-10 pl-10 sm:pb-20 sm:pl-20">
 	<div
 		class="experience-item-{key}-img absolute left-4 h-12 w-12 scale-125 sm:left-14 sm:h-20 sm:w-20"
 	>
-		<img src="/experience/{experience.icon}" alt={experience.org} />
+		<img class="rounded-full" src="/experience/{experience.icon}" alt={experience.org} />
 		{#if experience.iconBackdrop}
 			<svg
 				class="absolute top-0 left-0 -z-50 h-full w-full drop-shadow-xl"
@@ -66,7 +66,7 @@
 			{experience.role}
 		</div>
 		<div
-			class="pt-5 text-lg text-gray-300 sm:text-2xl [&_li]:list-disc [&_li]:pb-2 [&_ul]:leading-relaxed"
+			class="text-blue pt-5 text-lg text-gray-300 sm:text-2xl [&_li]:list-disc [&_li]:pb-2 [&_ul]:leading-relaxed"
 		>
 			{@html marked.parse(experience_details)}
 		</div>
