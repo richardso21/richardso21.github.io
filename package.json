@@ -38,5 +38,13 @@
 		"three": "^0.134.0",
 		"vanta": "^0.5.24",
 		"vite": "^6.2.0"
+	},
+	"pnpm": {
+		"ignoredBuiltDependencies": [
+			"esbuild"
+		],
+		"onlyBuiltDependencies": [
+			"esbuild"
+		]
 	}
 }

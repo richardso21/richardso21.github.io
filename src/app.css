@@ -19,3 +19,11 @@
 		border-color: var(--color-gray-200, currentColor);
 	}
 }
+
+@utility no-scrollbar {
+	@apply [scrollbar-width:none] [&::-webkit-scrollbar]:hidden;
+}
+
+@theme {
+	--color-navy: #111827;
+}

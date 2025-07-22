@@ -17,7 +17,7 @@
 <div
 	class="fixed top-0 left-0 z-10 h-screen w-screen transition-colors delay-500 duration-[2s] {mounted
 		? 'bg-red-950'
-		: 'bg-[#111827]'}"
+		: 'bg-navy'}"
 >
 	<div class="reveal flex h-full w-full flex-col items-center justify-center">
 		<h1 class="text-9xl font-bold italic">{page.status}</h1>

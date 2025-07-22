@@ -2,7 +2,7 @@
 	import '@fontsource-variable/inconsolata';
 	import '../app.css';
 	import { onMount } from 'svelte';
-	import { blur } from 'svelte/transition';
+	import { fade } from 'svelte/transition';
 	import * as THREE from 'three';
 	import { gsap } from 'gsap';
 	import { Flip } from 'gsap/Flip';
@@ -77,8 +77,8 @@
 	{#key data.pathname}
 		<main
 			class="child:py-24 px-8 sm:px-12"
-			out:blur={{ duration: 300 }}
-			in:blur={{ duration: data.pathname !== '/resume-frame' ? 0 : 300 }}
+			out:fade={{ duration: 250 }}
+			in:fade={{ duration: data.pathname !== '/resume-frame' ? 0 : 250 }}
 		>
 			{@render children()}
 		</main>
