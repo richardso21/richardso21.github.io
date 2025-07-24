@@ -1,11 +1,15 @@
 <script lang="ts">
 	import { onDestroy, onMount } from 'svelte';
 	import { gsap } from 'gsap';
-	import { flipState } from '$lib/FlipState.svelte.js';
+	import { flipState } from '$lib/FlipState.svelte';
 	import { anim_link_hero_tw } from '$lib/animLink.js';
+	import type { LinkMetaData } from '$lib/link.types.js';
 
 	const { data } = $props();
-	const { site_links, external_links } = data;
+	const {
+		site_links,
+		external_links
+	}: { site_links: Array<LinkMetaData>; external_links: Array<LinkMetaData> } = data;
 
 	const link_container_tw =
 		'child:pb-5 child:self-start mb-5 flex flex-col text-2xl decoration-gray-300 underline-offset-2 sm:text-3xl';
@@ -52,6 +56,21 @@
 	<meta name="og:type" content="profile" />
 </svelte:head>
 
+{#snippet hero_link(link: LinkMetaData, new_page: boolean = false)}
+	<div class="gsap-reveal">
+		<div class={anim_link_hero_tw}>
+			<a
+				href={link.href}
+				data-flip-id={link.href}
+				target={new_page ? '_blank' : ''}
+				class="inline-block underline"
+			>
+				{link.text}
+			</a>
+		</div>
+	</div>
+{/snippet}
+
 <div class="flex min-h-screen flex-col justify-center py-20">
 	<h1 class="gsap-reveal-first text-5xl font-bold text-white sm:text-8xl md:text-9xl">
 		Richard So
@@ -64,22 +83,11 @@
 	<hr class="gsap-reveal my-8 w-60 sm:w-96" />
 	<div class={link_container_tw}>
 		{#each site_links as link}
-			<div class="gsap-reveal">
-				<div class={anim_link_hero_tw}>
-					<a href={link.href} data-flip-id={link.href} class="inline-block underline">{link.text}</a
-					>
-				</div>
-			</div>
+			{@render hero_link(link)}
 		{/each}
 		<hr class="gsap-reveal mt-2 w-32 border-gray-600 sm:w-48" />
 		{#each external_links as link}
-			<div class="gsap-reveal">
-				<div class={anim_link_hero_tw}>
-					<a href={link.href} target="_blank" class="inline-block underline">
-						{link.text}
-					</a>
-				</div>
-			</div>
+			{@render hero_link(link, true)}
 		{/each}
 	</div>
 </div>

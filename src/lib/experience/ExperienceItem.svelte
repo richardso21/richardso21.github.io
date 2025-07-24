@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { gsap } from 'gsap';
-	import type { ExperienceMetaData } from './experience';
+	import type { ExperienceMetaData } from './experience.types';
 	import { marked } from 'marked';
 
 	let {
@@ -40,7 +40,7 @@
 	<div
 		class="experience-item-{key}-img absolute left-4 h-12 w-12 scale-125 sm:left-14 sm:h-20 sm:w-20"
 	>
-		<img class="rounded-full" src="/experience/{experience.icon}" alt={experience.org} />
+		<img class="rounded-full" src="/experience/{experience.icon_url}" alt={experience.org} />
 		{#if experience.iconBackdrop}
 			<svg
 				class="absolute top-0 left-0 -z-50 h-full w-full drop-shadow-xl"

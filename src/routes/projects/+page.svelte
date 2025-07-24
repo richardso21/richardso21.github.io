@@ -1,8 +1,18 @@
-<div class="m:px-6 h-screen px-12">
-	<h1
-		data-flip-id="/projects"
-		class="relative inline-block text-5xl font-bold text-white sm:text-7xl md:text-8xl"
-	>
-		Projects
-	</h1>
+<script lang="ts">
+	import { onDestroy, onMount } from 'svelte';
+	import { gsap } from 'gsap';
+	import FlipTitle from '$lib/FlipTitle.svelte';
+
+	const tl = gsap.timeline();
+
+	onMount(() => {});
+	onDestroy(() => {
+		tl.kill();
+	});
+</script>
+
+<div>
+	<div class="pb-12 sm:pb-16">
+		<FlipTitle flip_id="/projects" {tl}>Projects</FlipTitle>
+	</div>
 </div>

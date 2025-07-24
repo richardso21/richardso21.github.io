@@ -1,4 +1,4 @@
-import type { LinkMetaData } from '$lib';
+import type { LinkMetaData } from '$lib/link.types';
 
 const site_links: Array<LinkMetaData> = [
 	{

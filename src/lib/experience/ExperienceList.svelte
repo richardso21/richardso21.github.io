@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 	import { gsap } from 'gsap';
 	import ExperienceItem from './ExperienceItem.svelte';
-	import type { ExperienceMetaData } from './experience';
+	import type { ExperienceMetaData } from './experience.types';
 
 	let {
 		experiences,

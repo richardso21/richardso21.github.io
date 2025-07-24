@@ -1,5 +1,5 @@
 import { anim_link_tw } from '$lib/animLink';
-import type { ExperienceMetaData } from '$lib/experience/experience';
+import type { ExperienceMetaData } from '$lib/experience/experience.types';
 
 const link = (text: string, href: string) =>
 	`<a class="inline-block underline ${anim_link_tw}" href="${href}" target="_blank">${text}</a>`;
@@ -9,7 +9,7 @@ const experiences: Array<ExperienceMetaData> = [
 		org: 'D2I Lab @ Georgia Tech',
 		role: 'Researcher',
 		start: new Date(2025, 0),
-		icon: 'd2i.png',
+		icon_url: 'd2i.png',
 		iconBackdrop: 'white',
 		details: [
 			'Experimented new schemes for **faster, scalable LLM inference** in **retrieval-augmented generation** (RAG) workloads.',
@@ -24,7 +24,7 @@ const experiences: Array<ExperienceMetaData> = [
 		role: 'SWE Intern',
 		start: new Date(2024, 4),
 		end: new Date(2024, 7),
-		icon: 'amazon.png',
+		icon_url: 'amazon.png',
 		iconBackdrop: '#241F20',
 		details: [
 			'Analyzed developer experience across AWS through quantitative features extracted from recorded workflow sessions.',
@@ -37,7 +37,7 @@ const experiences: Array<ExperienceMetaData> = [
 		role: 'Senior Teaching Assistant',
 		start: new Date(2023, 0),
 		end: new Date(2024, 4),
-		icon: 'gt.png',
+		icon_url: 'gt.png',
 		iconBackdrop: 'white',
 		details: [
 			'Lectured biweekly to 50+ students on computer architecture foundations, the C language, and memory allocation concepts.',
@@ -49,7 +49,7 @@ const experiences: Array<ExperienceMetaData> = [
 		role: 'SWE Intern',
 		start: new Date(2023, 5),
 		end: new Date(2023, 7),
-		icon: 'tanium.png',
+		icon_url: 'tanium.png',
 		iconBackdrop: 'white',
 		details: [
 			'Implemented CRUD logging into a backend PostgreSQL database and REST API to elevate user visibility of Tanium Server.',
