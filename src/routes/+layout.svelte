@@ -39,13 +39,13 @@
 
 		// determine flipId based on direction of navigation
 		// (if navigating deeper into the site, use `to_url`, otherwise use `from_url`)
-		const is_deeper = to_url.includes(from_url);
-		const flip_id = is_deeper ? to_url : from_url;
+		const nav_to_deeper = to_url.includes(from_url);
+		const flip_id = nav_to_deeper ? to_url : from_url;
 
 		const target = `[data-flip-id='${flip_id}']`;
 
 		// set a different duration for the flip depending on the direction of the page transition
-		flipState.set(Flip.getState(target), target, to_url === '/' ? 0.7 : 0.4);
+		flipState.set(Flip.getState(target), target, nav_to_deeper ? 0.4 : 0.6);
 	});
 
 	afterNavigate(() => {
