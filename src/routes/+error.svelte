@@ -20,8 +20,8 @@
 		: 'bg-navy'}"
 >
 	<div class="reveal flex h-full w-full flex-col items-center justify-center">
-		<h1 class="text-9xl font-bold italic">{page.status}</h1>
-		<h2 class="w-auto text-center sm:w-1/3">{page.error?.message}</h2>
+		<h1 class="pr-4 text-9xl font-bold italic">{page.status}</h1>
+		<h2 class="w-11/12 text-center sm:w-1/3">{page.error?.message}</h2>
 	</div>
 </div>
 

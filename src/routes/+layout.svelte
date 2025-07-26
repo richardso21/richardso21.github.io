@@ -34,12 +34,18 @@
 	beforeNavigate((nav) => {
 		// store a flip state from a previously navigated page
 		if (!nav.to || !nav.from) return;
-		if ([nav.to.route.id, nav.from.route.id].includes('/resume-frame')) return;
-		const fromHome = nav.from.route.id === '/';
-		const flipId = fromHome ? nav.to.route.id : nav.from.route.id;
-		const target = `[data-flip-id='${flipId}']`;
+		const [to_url, from_url] = [nav.to.url.pathname, nav.from.url.pathname];
+		if ([to_url, from_url].includes('/resume-frame')) return;
+
+		// determine flipId based on direction of navigation
+		// (if navigating deeper into the site, use `to_url`, otherwise use `from_url`)
+		const is_deeper = to_url.includes(from_url);
+		const flip_id = is_deeper ? to_url : from_url;
+
+		const target = `[data-flip-id='${flip_id}']`;
+
 		// set a different duration for the flip depending on the direction of the page transition
-		flipState.set(Flip.getState(target), target, fromHome ? 0.4 : 0.7);
+		flipState.set(Flip.getState(target), target, to_url === '/' ? 0.7 : 0.4);
 	});
 
 	afterNavigate(() => {
@@ -76,8 +82,8 @@
 	<Nav />
 	{#key data.pathname}
 		<main
-			class="child:py-24 px-8 sm:px-12"
-			out:fade={{ duration: 250 }}
+			class="child:py-24 px-6 sm:px-12"
+			out:fade={{ duration: 150 }}
 			in:fade={{ duration: data.pathname !== '/resume-frame' ? 0 : 250 }}
 		>
 			{@render children()}

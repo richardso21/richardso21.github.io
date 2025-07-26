@@ -24,7 +24,7 @@
 </script>
 
 <div class="explist">
-	<div class="flex flex-row px-2 sm:px-12">
+	<div class="flex flex-row pl-3 sm:pl-12">
 		<div class="relative">
 			<div class="line h-full border-l border-gray-500"></div>
 		</div>
