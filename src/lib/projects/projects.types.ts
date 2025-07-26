@@ -1,8 +1,8 @@
 export type ProjectMetaData = {
-	uid: string;
 	title: string;
+	uid: string;
 	image_url: string;
 	tech_stack: Array<string>;
-	details: string | Array<string>;
+	details: string;
 	date: Date;
 };
