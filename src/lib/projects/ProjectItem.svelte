@@ -11,9 +11,9 @@
 		date.toLocaleDateString('default', { month: 'short', year: 'numeric' });
 </script>
 
-<div data-flip-id={href} class="project-item relative overflow-hidden rounded-md">
+<div data-flip-id={href} class="project-item relative h-[30vh] overflow-hidden rounded-md">
 	<a {href}>
-		<div class="group bg-navy h-72 w-full transition-all active:scale-95">
+		<div class="group h-full w-full bg-gray-700 transition-all active:scale-95">
 			<img
 				class="block h-full w-full object-cover transition duration-200 group-hover:blur-[1px] group-hover:brightness-75"
 				src="/projects/{image_url}"

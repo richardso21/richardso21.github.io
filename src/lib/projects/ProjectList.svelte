@@ -7,7 +7,6 @@
 
 	let { projects, tl = $bindable() }: { projects: Array<ProjectMetaData>; tl: gsap.core.Timeline } =
 		$props();
-	// let child_tl = $state<Array<gsap.core.Timeline>>(Array(projects.length));
 
 	tl = tl ?? gsap.timeline();
 	const reveal_before = {

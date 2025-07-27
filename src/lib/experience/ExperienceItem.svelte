@@ -34,10 +34,8 @@
 	});
 </script>
 
-<li class="pb-10 pl-10 sm:pb-20 sm:pl-20">
-	<div
-		class="experience-item-{key}-img absolute left-3 h-12 w-12 scale-125 sm:left-14 sm:h-20 sm:w-20"
-	>
+<li class="relative pb-10 pl-10 sm:pb-20 sm:pl-20">
+	<div class="experience-item-{key}-img absolute -left-10 h-12 w-12 scale-125 sm:h-20 sm:w-20">
 		<img class="rounded-full" src="/experience/{experience.icon_url}" alt={experience.org} />
 		{#if experience.iconBackdrop}
 			<svg
