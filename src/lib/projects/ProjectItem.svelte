@@ -22,9 +22,7 @@
 			<div
 				class="absolute bottom-0 left-0 z-10 w-full p-5 backdrop-blur-lg backdrop-brightness-75 transition-all duration-200 ease-out group-hover:bottom-0 sm:-bottom-40"
 			>
-				<h2
-					class="inline pb-5 text-2xl font-bold text-white [text-shadow:0_0_5px_black] sm:text-3xl"
-				>
+				<h2 class="pb-2 text-2xl font-bold text-white [text-shadow:0_0_5px_black] sm:text-3xl">
 					{title}
 				</h2>
 				<p class="text-md font-medium text-gray-100 italic sm:text-xl">{tech_stack.join(', ')}</p>
