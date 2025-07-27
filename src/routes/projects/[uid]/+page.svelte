@@ -41,7 +41,7 @@
 </script>
 
 <div class="relative w-full">
-	<h1 class="pd-title inline-block pb-10 text-6xl font-bold text-white sm:text-7xl md:text-8xl">
+	<h1 class="pd-title inline-block pb-10 text-5xl font-bold text-white sm:text-6xl md:text-7xl">
 		{title}
 	</h1>
 	<div

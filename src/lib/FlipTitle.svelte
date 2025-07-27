@@ -11,16 +11,16 @@
 
 	tl = tl ?? gsap.timeline();
 	onMount(() => {
-		if (!flipState.active) {
+		if (flipState.active && flipState.get().target === `[data-flip-id='${flip_id}']`) {
+			// don't animate visibility or y position because it's being flipped
+			tl.to('.flip-title', { y: 0, autoAlpha: 1, duration: 0 });
+			tl.delay(0.5);
+		} else {
 			tl.fromTo(
 				'.flip-title',
 				{ y: 200, autoAlpha: 0 },
 				{ y: 0, autoAlpha: 1, duration: 0.5, ease: 'circ.out' }
 			);
-		} else {
-			// don't animate visibility or y position because it's being flipped
-			tl.to('.flip-title', { y: 0, autoAlpha: 1, duration: 0 });
-			tl.delay(0.5);
 		}
 	});
 </script>
