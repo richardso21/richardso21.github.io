@@ -1,3 +1,7 @@
+<svelte:head>
+	<title>Resume | Richard So</title>
+</svelte:head>
+
 <div class="fixed top-0 left-0">
 	<iframe
 		src="https://richardso21.github.io/resume"

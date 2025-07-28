@@ -18,6 +18,10 @@
 	});
 </script>
 
+<svelte:head>
+	<title>Projects | Richard So</title>
+</svelte:head>
+
 <div>
 	<div class="pb-10">
 		<FlipTitle flip_id="/projects" {tl}>Projects</FlipTitle>

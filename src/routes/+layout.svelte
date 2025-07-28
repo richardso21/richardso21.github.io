@@ -3,6 +3,7 @@
 	import '../app.css';
 	import { dev } from '$app/environment';
 	import { injectAnalytics } from '@vercel/analytics/sveltekit';
+	import { injectSpeedInsights } from '@vercel/speed-insights/sveltekit';
 	import { onMount } from 'svelte';
 	import { fade } from 'svelte/transition';
 	import * as THREE from 'three';
@@ -15,8 +16,9 @@
 	import Nav from '$lib/Nav.svelte';
 	import { flipState } from '$lib/FlipState.svelte';
 
-	// vercel web analytics
+	// vercel web analytics + speed insights
 	injectAnalytics({ mode: dev ? 'development' : 'production' });
+	injectSpeedInsights();
 
 	gsap.registerPlugin(Flip);
 

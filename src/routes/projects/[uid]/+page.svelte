@@ -40,6 +40,10 @@
 	});
 </script>
 
+<svelte:head>
+	<title>{title} | Richard So</title>
+</svelte:head>
+
 <div class="relative w-full">
 	<h1 class="pd-title inline-block pb-10 text-5xl font-bold text-white sm:text-6xl md:text-7xl">
 		{title}
