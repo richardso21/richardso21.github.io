@@ -36,6 +36,7 @@
 		"@vercel/analytics": "^1.5.0",
 		"@vercel/speed-insights": "^1.2.0",
 		"gsap": "^3.12.7",
+		"is-mobile": "^5.0.0",
 		"marked": "^15.0.7",
 		"three": "^0.134.0",
 		"vanta": "^0.5.24",

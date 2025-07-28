@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { ProjectMetaData } from './projects.types';
+	import { isMobile } from 'is-mobile';
 
 	let { project }: { project: ProjectMetaData } = $props();
 
@@ -20,7 +21,9 @@
 				alt=""
 			/>
 			<div
-				class="absolute bottom-0 left-0 z-10 w-full p-5 backdrop-blur-lg backdrop-brightness-75 transition-all duration-200 ease-out group-hover:bottom-0 sm:-bottom-40"
+				class="absolute left-0 z-10 w-full p-5 backdrop-blur-lg backdrop-brightness-75 transition-all duration-200 ease-out group-hover:bottom-0 {isMobile()
+					? 'bottom-0'
+					: '-bottom-40'}"
 			>
 				<h2 class="pb-2 text-2xl font-bold text-white [text-shadow:0_0_5px_black] sm:text-3xl">
 					{title}

@@ -89,7 +89,7 @@
 	<Nav />
 	{#key data.pathname}
 		<main
-			class="child:py-24 px-96 max-[2561px]:px-56 max-[1921px]:px-12 max-sm:px-6"
+			class="child:py-24 px-[10vw] max-[1921px]:px-12 max-sm:px-6"
 			out:fade={{ duration: 150 }}
 			in:fade={{ duration: data.pathname !== '/resume-frame' ? 0 : 250 }}
 		>

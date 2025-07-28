@@ -14,14 +14,14 @@ export const projects: Record<string, Omit<ProjectMetaData, 'uid'>> = {
 		details: `
 Revived and maintained the LC3Tools project, an educational
 software suite to write, simulate, and debug assembly for the
-${link('Little Computer 3', 'https://en.wikipedia.org/wiki/Little_Computer_3')}.
+${link('Little Computer 3', 'https://en.wikipedia.org/wiki/Little_Computer_3')}
 
 Worked on this as a **CS 2110 TA**, used by over **1000 students per
 semester**. Completely revamped its testing suite, resolved
 tokenizer nuances, and made countless QoL UI improvements.
 
 _View the gt-cs2110 fork of LC3Tools_
-${link('here', 'https://github.com/gt-cs2110/lc3tools')}.
+${link('here', 'https://github.com/gt-cs2110/lc3tools')}
 `
 	},
 	caribou: {
@@ -40,7 +40,7 @@ Innovation and Creativity**.
 _View the project's:_
 ${link('Github', 'https://github.com/richardso21/serp2021-bgsub')},
 ${link('Paper', 'https://cdn.jsdelivr.net/gh/richardso21/SERP2021-BGSUB@main/Paper_21_6_SO.pdf')},
-${link('Video', 'https://youtu.be/BKwb6yks85o')}.
+${link('Video', 'https://youtu.be/BKwb6yks85o')}
 `
 	},
 	ttris: {
@@ -55,7 +55,7 @@ hold, soft drop, Super Rotation System (SRS), and more...to come.
 
 ${link('View the source code', 'https://github.com/richardso21/ttris')}
 _or play it online_
-${link('here', 'https://richardso21.github.io/ttris/')}.
+${link('here', 'https://richardso21.github.io/ttris/')}
 `
 	},
 	moe: {
@@ -71,12 +71,12 @@ generalization (DG).
 Dubbed **MEADOW**
 (**M**ixture of **E**xperts for **A**bundant **DO**main on **W**ILDS), we test
 DG-capability of MoEs against the
-${link('Stanford WILDS iWildCam benchmark', 'https://wilds.stanford.edu/datasets/#iwildcam')}.
+${link('Stanford WILDS iWildCam benchmark', 'https://wilds.stanford.edu/datasets/#iwildcam')}
 
 Final project for **CS 8803: Data-Centric ML**. _View the_
 ${link('presentation', 'https://docs.google.com/presentation/d/1XKCtPTC0Dq2isUjqZ1vtgED58C33M79V7p-n6B-CMqE/edit?usp=sharing')},
 ${link('report', 'https://cdn.jsdelivr.net/gh/Data-Centric-ML-MEADOW/meadow@main/CS_8803_DML_Project_Final_Report.pdf')},
-or ${link('code', 'https://github.com/Data-Centric-ML-MEADOW/meadow')}.
+or ${link('code', 'https://github.com/Data-Centric-ML-MEADOW/meadow')}
 `
 	},
 	layerleap: {
@@ -95,7 +95,7 @@ and time.
 
 Final project for **CS 7643: Deep Learning**.
 _View the final report_
-${link('here', '/projects/cs7643.pdf')}.
+${link('here', '/projects/cs7643.pdf')}
 `
 	},
 	potus: {
@@ -112,7 +112,7 @@ Addresses from the American Presidency Project website, along with
 
 Final project for **LING 3100: Applications to Linguistics**.
 _View the colab notebook_
-${link('here', 'https://colab.research.google.com/drive/1Nad6-QSXxrYZIGiX7j5It3ebqHk7TnOW')}.
+${link('here', 'https://colab.research.google.com/drive/1Nad6-QSXxrYZIGiX7j5It3ebqHk7TnOW')}
 `
 	}
 };
