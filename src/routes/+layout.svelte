@@ -1,6 +1,8 @@
 <script lang="ts">
 	import '@fontsource-variable/inconsolata';
 	import '../app.css';
+	import { dev } from '$app/environment';
+	import { injectAnalytics } from '@vercel/analytics/sveltekit';
 	import { onMount } from 'svelte';
 	import { fade } from 'svelte/transition';
 	import * as THREE from 'three';
@@ -12,6 +14,9 @@
 	import { afterNavigate, beforeNavigate } from '$app/navigation';
 	import Nav from '$lib/Nav.svelte';
 	import { flipState } from '$lib/FlipState.svelte';
+
+	// vercel web analytics
+	injectAnalytics({ mode: dev ? 'development' : 'production' });
 
 	gsap.registerPlugin(Flip);
 
