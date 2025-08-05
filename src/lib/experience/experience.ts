@@ -1,10 +1,7 @@
-import { anim_link_tw } from '$lib/animLink';
+import { md_link as link } from '$lib/animLink';
 import type { ExperienceMetaData } from '$lib/experience/experience.types';
 
-const link = (text: string, href: string) =>
-	`<a class="inline-block underline ${anim_link_tw}" href="${href}" target="_blank">${text}</a>`;
-
-const experiences: Array<ExperienceMetaData> = [
+export const experiences: Array<ExperienceMetaData> = [
 	{
 		org: 'D2I Lab @ Georgia Tech',
 		role: 'Researcher',
@@ -58,9 +55,3 @@ const experiences: Array<ExperienceMetaData> = [
 		]
 	}
 ];
-
-export async function load() {
-	return {
-		experiences
-	};
-}

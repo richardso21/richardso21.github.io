@@ -3,9 +3,7 @@
 	import { gsap } from 'gsap';
 	import ExperienceList from '$lib/experience/ExperienceList.svelte';
 	import FlipTitle from '$lib/FlipTitle.svelte';
-
-	const { data } = $props();
-	const { experiences } = data;
+	import { experiences } from '$lib/experience/experience';
 
 	const tl = gsap.timeline();
 	let exp_list_tl = $state<gsap.core.Timeline>(gsap.timeline());
