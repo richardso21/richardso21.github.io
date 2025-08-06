@@ -72,7 +72,7 @@
 {/snippet}
 
 <div class="flex min-h-screen flex-col justify-center py-20">
-	<h1 class="gsap-reveal-first text-5xl font-bold text-white sm:text-8xl md:text-9xl">
+	<h1 class="gsap-reveal-first text-[16vw] font-bold text-white sm:text-8xl md:text-9xl">
 		Richard So
 	</h1>
 	<h3 class="gsap-reveal pt-2 text-xl text-gray-400 italic sm:pt-0 md:text-2xl">
