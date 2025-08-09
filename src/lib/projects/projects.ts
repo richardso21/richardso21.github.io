@@ -57,7 +57,7 @@ ${link('here', 'https://richardso21.github.io/ttris/')}
 	},
 	moe: {
 		title: 'MoEs for Domain Generalization',
-		tech_stack: ['PyTorch', 'Lightning'],
+		tech_stack: ['PyTorch', 'Lightning', 'HF Datasets'],
 		date: new Date(2024, 11),
 		image_url: 'moe.png',
 		details: `
@@ -80,7 +80,7 @@ or ${link('code', 'https://github.com/Data-Centric-ML-MEADOW/meadow')}
 		title: 'LayerLeap',
 		tech_stack: ['PyTorch', 'Transformers'],
 		date: new Date(2025, 4),
-		image_url: 'ls.gif',
+		image_url: 'dls.png',
 		details: `
 Experimented with multiple strategies to augment
 **${link('LayerSkip', 'https://arxiv.org/pdf/2404.16710')}**, a solution to

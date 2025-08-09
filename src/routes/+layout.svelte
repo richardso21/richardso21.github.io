@@ -120,7 +120,7 @@
 		<main
 			class="child:py-24 px-[10vw] max-[1921px]:px-12 max-sm:px-6"
 			out:fade={{ duration: 150 }}
-			in:fade={{ duration: 250 }}
+			in:fade={{ duration: data.pathname === '/resume' ? 250 : 0 }}
 		>
 			{@render children()}
 		</main>
