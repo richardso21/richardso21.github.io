@@ -13,8 +13,12 @@ export const site_links: Array<LinkMetaData> = [
 		text: 'Projects'
 	},
 	{
-		href: '/resume-frame',
+		href: '/resume',
 		text: 'Resume'
+	},
+	{
+		href: '/blog',
+		text: 'Blog'
 	}
 ];
 

@@ -6,8 +6,7 @@ export const load = ({ url }) => {
 	const vanta_zoom = (): number => {
 		switch (pathname) {
 			case '/':
-				return 1;
-			case '/resume-frame':
+			case '/resume':
 				return 1;
 			case '/experience':
 				return 1.5;

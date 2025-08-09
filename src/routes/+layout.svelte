@@ -22,27 +22,40 @@
 
 	gsap.registerPlugin(Flip);
 
-	let { data, children } = $props();
+	const { data, children } = $props();
 
-	let mounted = $state(false);
+	let usingVanta = $state(false);
+	let vantaDestroyTimeoutID = $state<number>(0);
+	let vantaEffect: WAVES = $state(undefined);
 
-	// init vanta effect
-	let vanta_effect: WAVES;
-	onMount(() => {
-		mounted = true;
-		vanta_effect = WAVES({
+	const createVantaEffect = () => {
+		vantaEffect = WAVES({
 			el: '#vanta-bg',
 			color: 0x060f1f,
 			shininess: 7.5,
 			THREE: THREE
 		});
+	};
+
+	const shouldUseVanta = (): boolean => {
+		// Use vanta except for `/resume` or `/blog/*`
+		return data.pathname.match(/^(\/resume|\/blog)/) !== null;
+	};
+
+	// init vanta effect
+	onMount(() => {
+		if (shouldUseVanta()) {
+			usingVanta = true;
+			createVantaEffect();
+		}
 	});
 
 	beforeNavigate((nav) => {
 		// store a flip state from a previously navigated page
 		if (!nav.to || !nav.from) return;
 		const [to_url, from_url] = [nav.to.url.pathname, nav.from.url.pathname];
-		if ([to_url, from_url].includes('/resume-frame')) return;
+		// we don't do flip animations to/from `/resume`
+		if ([to_url, from_url].includes('/resume')) return;
 
 		// determine flipId based on direction of navigation
 		// (if navigating deeper into the site, use `to_url`, otherwise use `from_url`)
@@ -57,11 +70,27 @@
 
 	afterNavigate(() => {
 		// we need to manually trigger mousemove to update the zoom
-		const zoom = data.vanta_zoom();
-		vanta_effect.setOptions({ zoom });
-		setTimeout(() => {
-			vanta_effect.triggerMouseMove();
-		}, 100);
+		if (vantaEffect !== undefined) {
+			const zoom = data.vanta_zoom();
+			vantaEffect.setOptions({ zoom });
+			setTimeout(() => {
+				vantaEffect.triggerMouseMove();
+			}, 100);
+		}
+
+		// check if we should destroy the vanta background instance
+		if (shouldUseVanta()) {
+			// if entering into a page that doesn't show vanta, destroy the instance
+			usingVanta = false;
+			vantaDestroyTimeoutID = setTimeout(() => {
+				vantaEffect.destroy();
+				vantaEffect = undefined;
+			}, 2000); // we wait for transitions to complete before destroying
+		} else if (!usingVanta) {
+			usingVanta = true;
+			// recreate the effect if it was destroyed, otherwise clear the timeout to destroy it
+			vantaEffect === undefined ? createVantaEffect() : clearTimeout(vantaDestroyTimeoutID);
+		}
 
 		// check if we need to flip anything
 		if (flipState.active) {
@@ -83,7 +112,7 @@
 <div
 	id="vanta-bg"
 	class={'fixed -z-10 h-screen w-screen transition delay-700 duration-1000 ease-in-out ' +
-		(mounted ? 'opacity-100' : 'opacity-0')}
+		(usingVanta ? 'opacity-100' : 'opacity-0')}
 ></div>
 <div class="transition-container relative overflow-hidden">
 	<Nav />
@@ -91,7 +120,7 @@
 		<main
 			class="child:py-24 px-[10vw] max-[1921px]:px-12 max-sm:px-6"
 			out:fade={{ duration: 150 }}
-			in:fade={{ duration: data.pathname !== '/resume-frame' ? 0 : 250 }}
+			in:fade={{ duration: 250 }}
 		>
 			{@render children()}
 		</main>

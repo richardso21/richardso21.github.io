@@ -31,7 +31,7 @@
 		'bg-navy -skew-x-[20deg] child:skew-x-[20deg] pl-2 pr-5 drop-shadow-[0_5px_5px_rgba(0,0,0,0.25)]';
 </script>
 
-{#if !['/', '/resume-frame'].includes(page.url.pathname)}
+{#if !['/', '/resume'].includes(page.url.pathname)}
 	<nav
 		transition:fly={{ x: -50, duration: 200 }}
 		class="no-scrollbar fixed z-10 w-full overflow-x-auto scroll-smooth pb-5 text-lg text-gray-300 sm:text-xl"
