@@ -1,6 +1,9 @@
-import type { LinkMetaData } from '$lib/link.types';
+export type LinkMetaData = {
+	href: string;
+	text: string;
+};
 
-const site_links: Array<LinkMetaData> = [
+export const site_links: Array<LinkMetaData> = [
 	{
 		href: '/experience',
 		text: 'Experience'
@@ -15,7 +18,7 @@ const site_links: Array<LinkMetaData> = [
 	}
 ];
 
-const external_links: Array<LinkMetaData> = [
+export const external_links: Array<LinkMetaData> = [
 	{
 		href: 'https://www.linkedin.com/in/richardso21',
 		text: 'LinkedIn'
@@ -25,10 +28,3 @@ const external_links: Array<LinkMetaData> = [
 		text: 'GitHub'
 	}
 ];
-
-export async function load() {
-	return {
-		site_links,
-		external_links
-	};
-}

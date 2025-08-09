@@ -3,16 +3,7 @@
 	import { gsap } from 'gsap';
 	import { flipState } from '$lib/FlipState.svelte';
 	import { anim_link_hero_tw } from '$lib/animLink.js';
-	import type { LinkMetaData } from '$lib/link.types.js';
-
-	const { data } = $props();
-	const {
-		site_links,
-		external_links
-	}: { site_links: Array<LinkMetaData>; external_links: Array<LinkMetaData> } = data;
-
-	const link_container_tw =
-		'child:pb-5 child:self-start mb-5 flex flex-col text-2xl decoration-gray-300 underline-offset-2 sm:text-3xl';
+	import { external_links, site_links, type LinkMetaData } from '$lib/links';
 
 	const reveal_before = {
 		y: 100,
@@ -81,7 +72,9 @@
 		all things code
 	</h3>
 	<hr class="gsap-reveal my-8 w-60 sm:w-96" />
-	<div class={link_container_tw}>
+	<div
+		class={'child:pb-5 child:self-start mb-5 flex flex-col text-2xl decoration-gray-300 underline-offset-2 sm:text-3xl'}
+	>
 		{#each site_links as link}
 			{@render hero_link(link)}
 		{/each}
