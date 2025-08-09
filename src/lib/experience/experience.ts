@@ -3,6 +3,14 @@ import type { ExperienceMetaData } from '$lib/experience/experience.types';
 
 export const experiences: Array<ExperienceMetaData> = [
 	{
+		org: 'Amazon',
+		role: 'Current SDE',
+		start: new Date(2025, 7),
+		icon_url: 'amazon.png',
+		iconBackdrop: '#241F20',
+		details: []
+	},
+	{
 		org: 'D2I Lab @ Georgia Tech',
 		role: 'Researcher',
 		start: new Date(2025, 0),

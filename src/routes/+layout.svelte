@@ -133,6 +133,7 @@
 		font-display: swap;
 		color: white;
 		background-color: #111827;
+		scroll-behavior: smooth;
 	}
 
 	/* resolves issue with overlapping elements during transitions */

@@ -21,7 +21,7 @@ _View the gt-cs2110 fork of LC3Tools_
 ${link('here', 'https://github.com/gt-cs2110/lc3tools')}
 `
 	},
-	caribou: {
+	caribou_detection: {
 		title: 'Alaskan Caribou Image Detection',
 		tech_stack: ['PyTorch', 'Keras', 'Pillow'],
 		date: new Date(2021, 1),
@@ -55,9 +55,9 @@ _or play it online_
 ${link('here', 'https://richardso21.github.io/ttris/')}
 `
 	},
-	moe: {
+	moe_domain_generalization: {
 		title: 'MoEs for Domain Generalization',
-		tech_stack: ['PyTorch', 'Lightning', 'HF Datasets'],
+		tech_stack: ['PyTorch', 'Lightning'],
 		date: new Date(2024, 11),
 		image_url: 'moe.png',
 		details: `
@@ -67,8 +67,9 @@ generalization (DG).
 
 Dubbed **MEADOW**
 (**M**ixture of **E**xperts for **A**bundant **DO**main on **W**ILDS), we test
-DG-capability of MoEs against the
-${link('Stanford WILDS iWildCam benchmark', 'https://wilds.stanford.edu/datasets/#iwildcam')}
+DG-capability of MoEs against the Stanford
+${link('WILDS iWildCam', 'https://wilds.stanford.edu/datasets/#iwildcam')}
+benchmark.
 
 Final project for **CS 8803: Data-Centric ML**. _View the_
 ${link('presentation', 'https://docs.google.com/presentation/d/1XKCtPTC0Dq2isUjqZ1vtgED58C33M79V7p-n6B-CMqE/edit?usp=sharing')},
@@ -95,7 +96,7 @@ _View the final report_
 ${link('here', '/projects/cs7643.pdf')}
 `
 	},
-	potus: {
+	potus_sentiment_analysis: {
 		title: 'POTUS Sentiment Analysis',
 		tech_stack: ['Transformers', 'NLTK', 'BeautifulSoup'],
 		date: new Date(2023, 11),
@@ -111,5 +112,37 @@ Final project for **LING 3100: Applications to Linguistics**.
 _View the colab notebook_
 ${link('here', 'https://colab.research.google.com/drive/1Nad6-QSXxrYZIGiX7j5It3ebqHk7TnOW')}
 `
+	},
+	controlnet_augmentation: {
+		title: 'ControlNet Augmentation',
+		tech_stack: ['PyTorch', 'Scikit-Image'],
+		date: new Date(2024, 4),
+		image_url: 'cnet.png',
+		details: `
+Explored the use of image generation methods like **Stable Diffusion** and
+**ControlNet** to augment very small datasets for image classification tasks.
+Found a **10%** F1 score improvement on extremely sparse datasets (w/ ResNet-50).
+
+_View the final report_
+${link('here', 'https://richardso21.github.io/controlnet-augmentation/2024/04/20/final-project.html')}
+		`
+	},
+	this_site: {
+		title: 'sorichard.com',
+		tech_stack: ['SvelteKit', 'GSAP', 'Tailwind'],
+		date: new Date(2025, 7),
+		image_url: 'site.png',
+		details: `
+My portfolio website, not only to showcase my experience/projects, but also my
+ability to **craft a delightful web UX** with modern frameworks.
+
+Built with **Typescript** and **SvelteKit**. All stylings (using Tailwind) are
+**fully responsive and custom**, borrowing components is lame. Animations
+done with **GSAP Flip**. Only thing I can credit is
+${link('Vanta', 'https://github.com/tengbao/vanta')} for the amazing
+background effects.
+
+_Want to visit this site? You're already here!_
+		`
 	}
 };

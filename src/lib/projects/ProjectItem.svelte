@@ -11,11 +11,15 @@
 	const getDateString = (date: Date) =>
 		date.toLocaleDateString('default', { month: 'short', year: 'numeric' });
 
-	const group_img_focused = 'group-hover:brightness-75 group-focus-visible:brightness-75';
+	const group_img_focused =
+		'group-hover:blur-[1px] group-hover:brightness-75 group-focus-visible:blur-[1px] group-focus-visible:brightness-75';
 	const group_desc_focused = 'group-hover:bottom-0 group-focus-visible:bottom-0';
 </script>
 
-<div data-flip-id={href} class="project-item relative h-[30vh] overflow-hidden rounded-md">
+<div
+	data-flip-id={href}
+	class="project-item relative h-[30vh] overflow-hidden rounded-md shadow-2xl"
+>
 	<a {href} class="group">
 		<div
 			class="h-full w-full bg-gray-700 transition-all group-focus-visible:scale-95 active:scale-95"
