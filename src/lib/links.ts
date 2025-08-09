@@ -32,3 +32,8 @@ export const external_links: Array<LinkMetaData> = [
 		text: 'GitHub'
 	}
 ];
+
+export const importImgLookup = (imports: Record<string, unknown>): Record<string, string> =>
+	Object.fromEntries(
+		Object.entries(imports).map(([path, mod]) => [path.split('/').pop()!, mod as unknown as string])
+	);

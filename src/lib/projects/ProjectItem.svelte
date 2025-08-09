@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { optImgs } from './projects';
 	import type { ProjectMetaData } from './projects.types';
 	import { isMobile } from 'is-mobile';
 
@@ -24,9 +25,9 @@
 		<div
 			class="h-full w-full bg-gray-700 transition-all group-focus-visible:scale-95 active:scale-95"
 		>
-			<img
+			<enhanced:img
 				class="block h-full w-full object-cover transition duration-200 {group_img_focused}"
-				src="/projects/{image_url}"
+				src={optImgs[image_url]}
 				alt=""
 			/>
 			<div

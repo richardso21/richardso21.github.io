@@ -1,5 +1,20 @@
 import { md_link as link } from '$lib/animLink';
+import { importImgLookup } from '$lib/links';
 import type { ProjectMetaData } from './projects.types';
+
+// Build a map from bare filename (e.g., 'site.png') to the enhanced image URL/module
+const optImgImports = import.meta.glob('$lib/assets/projects/*.{png,gif}', {
+	eager: true,
+	import: 'default',
+	query: { enhanced: true }
+});
+export const optImgs: Record<string, string> = importImgLookup(optImgImports);
+
+const rawImgImports = import.meta.glob('$lib/assets/projects/*.{png,gif}', {
+	eager: true,
+	import: 'default'
+});
+export const rawImgs = importImgLookup(rawImgImports);
 
 // object keys are their respective UIDs
 export const projects: Record<string, Omit<ProjectMetaData, 'uid'>> = {
@@ -93,7 +108,7 @@ and time.
 
 Final project for **CS 7643: Deep Learning**.
 _View the final report_
-${link('here', '/projects/cs7643.pdf')}
+${link('here', 'https://drive.google.com/file/d/1KxGa0Betps-chLQNVHpm_8uTr_9NUgaI/view?usp=sharing')}
 `
 	},
 	potus_sentiment_analysis: {
@@ -125,7 +140,7 @@ Found a **10%** F1 score improvement on extremely sparse datasets (w/ ResNet-50)
 
 _View the final report_
 ${link('here', 'https://richardso21.github.io/controlnet-augmentation/2024/04/20/final-project.html')}
-		`
+`
 	},
 	this_site: {
 		title: 'sorichard.com',
@@ -143,6 +158,6 @@ ${link('Vanta', 'https://github.com/tengbao/vanta')} for the amazing
 background effects.
 
 _Want to visit this site? You're already here!_
-		`
+`
 	}
 };
