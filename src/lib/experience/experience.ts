@@ -1,13 +1,13 @@
 import { md_link as link } from '$lib/animLink';
 import type { ExperienceMetaData } from '$lib/experience/experience.types';
-import { importImgLookup } from '$lib/links';
+import { importsToMap } from '$lib/links';
 
 const iconImports = import.meta.glob('$lib/assets/experience/*.{png,gif}', {
 	eager: true,
 	import: 'default',
 	query: { enhanced: true }
 });
-export const iconImgs: Record<string, string> = importImgLookup(iconImports);
+export const iconImgs = importsToMap(iconImports);
 
 export const experiences: Array<ExperienceMetaData> = [
 	{

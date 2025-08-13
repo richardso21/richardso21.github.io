@@ -37,10 +37,9 @@
 		});
 	};
 
-	const shouldUseVanta = (): boolean => {
-		// Use vanta except for `/resume` or `/blog/*`
-		return data.pathname.match(/^(\/resume|\/blog)/) !== null;
-	};
+	const shouldUseVanta = $derived(() => {
+		return data.pathname.match(/^(\/resume|\/blog)/) === null;
+	});
 
 	// init vanta effect
 	onMount(() => {
@@ -79,14 +78,14 @@
 		}
 
 		// check if we should destroy the vanta background instance
-		if (shouldUseVanta()) {
+		if (!shouldUseVanta() && usingVanta) {
 			// if entering into a page that doesn't show vanta, destroy the instance
 			usingVanta = false;
 			vantaDestroyTimeoutID = setTimeout(() => {
 				vantaEffect.destroy();
 				vantaEffect = undefined;
 			}, 2000); // we wait for transitions to complete before destroying
-		} else if (!usingVanta) {
+		} else if (shouldUseVanta() && !usingVanta) {
 			usingVanta = true;
 			// recreate the effect if it was destroyed, otherwise clear the timeout to destroy it
 			vantaEffect === undefined ? createVantaEffect() : clearTimeout(vantaDestroyTimeoutID);

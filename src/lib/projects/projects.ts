@@ -1,5 +1,5 @@
 import { md_link as link } from '$lib/animLink';
-import { importImgLookup } from '$lib/links';
+import { importsToMap } from '$lib/links';
 import type { ProjectMetaData } from './projects.types';
 
 // Build a map from bare filename (e.g., 'site.png') to the enhanced image URL/module
@@ -8,13 +8,13 @@ const optImgImports = import.meta.glob('$lib/assets/projects/*.{png,gif}', {
 	import: 'default',
 	query: { enhanced: true }
 });
-export const optImgs: Record<string, string> = importImgLookup(optImgImports);
+export const optImgs: Record<string, string> = importsToMap(optImgImports);
 
 const rawImgImports = import.meta.glob('$lib/assets/projects/*.{png,gif}', {
 	eager: true,
 	import: 'default'
 });
-export const rawImgs = importImgLookup(rawImgImports);
+export const rawImgs = importsToMap(rawImgImports);
 
 // object keys are their respective UIDs
 export const projects: Record<string, Omit<ProjectMetaData, 'uid'>> = {

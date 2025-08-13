@@ -33,7 +33,7 @@ export const external_links: Array<LinkMetaData> = [
 	}
 ];
 
-export const importImgLookup = (imports: Record<string, unknown>): Record<string, string> =>
+export const importsToMap = (imports: Record<string, unknown>): Record<string, any> =>
 	Object.fromEntries(
-		Object.entries(imports).map(([path, mod]) => [path.split('/').pop()!, mod as unknown as string])
+		Object.entries(imports).map(([path, mod]) => [path.split('/').pop()!, mod as unknown as any])
 	);

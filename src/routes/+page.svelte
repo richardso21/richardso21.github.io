@@ -2,8 +2,8 @@
 	import { onDestroy, onMount } from 'svelte';
 	import { gsap } from 'gsap';
 	import { flipState } from '$lib/FlipState.svelte';
-	import { anim_link_hero_tw } from '$lib/animLink.js';
 	import { external_links, site_links, type LinkMetaData } from '$lib/links';
+	import AnimatedLink from '$lib/AnimatedLink.svelte';
 
 	const reveal_before = {
 		y: 100,
@@ -49,16 +49,7 @@
 
 {#snippet hero_link(link: LinkMetaData, new_page: boolean = false)}
 	<div class="gsap-reveal">
-		<div class={anim_link_hero_tw}>
-			<a
-				href={link.href}
-				data-flip-id={link.href}
-				target={new_page ? '_blank' : ''}
-				class="inline-block underline"
-			>
-				{link.text}
-			</a>
-		</div>
+		<AnimatedLink {link} {new_page} />
 	</div>
 {/snippet}
 

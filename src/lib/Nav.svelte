@@ -54,7 +54,7 @@
 								<a href={crumb.path}>{crumb.name}</a>
 							</div>
 						{:else}
-							<span class="font-bold">{crumb.name}</span>
+							<span class="font-bold text-blue-300">{crumb.name}</span>
 						{/if}
 					</li>
 				{/each}
