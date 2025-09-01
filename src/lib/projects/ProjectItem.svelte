@@ -1,7 +1,7 @@
 <script lang="ts">
+	import { state } from '$lib/state.svelte';
 	import { optImgs } from './projects';
 	import type { ProjectMetaData } from './projects.types';
-	import { isMobile } from 'is-mobile';
 
 	let { project }: { project: ProjectMetaData } = $props();
 
@@ -31,7 +31,7 @@
 				alt=""
 			/>
 			<div
-				class="absolute left-0 z-10 w-full p-5 backdrop-blur-md backdrop-brightness-75 transition-all duration-200 ease-out {group_desc_focused} {isMobile()
+				class="absolute left-0 z-10 w-full p-5 backdrop-blur-md backdrop-brightness-75 transition-all duration-200 ease-out {group_desc_focused} {state.isUserMobile
 					? 'bottom-0'
 					: '-bottom-40'}"
 			>

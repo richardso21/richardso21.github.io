@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onDestroy, onMount } from 'svelte';
 	import { gsap } from 'gsap';
-	import { flipState } from '$lib/FlipState.svelte';
+	import { flipState } from '$lib/state.svelte';
 	import { external_links, site_links, type LinkMetaData } from '$lib/links';
 	import AnimatedLink from '$lib/AnimatedLink.svelte';
 

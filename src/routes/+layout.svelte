@@ -9,24 +9,39 @@
 	import * as THREE from 'three';
 	import { gsap } from 'gsap';
 	import { Flip } from 'gsap/Flip';
+	import { isMobile } from 'is-mobile';
 	// @ts-ignore
 	import WAVES from 'vanta/dist/vanta.waves.min';
 
 	import { afterNavigate, beforeNavigate } from '$app/navigation';
 	import Nav from '$lib/Nav.svelte';
-	import { flipState } from '$lib/FlipState.svelte';
+	import {
+		flipState,
+		state as internal_state,
+		loadFromLocalStorage,
+		saveToLocalStorage
+	} from '$lib/state.svelte';
+	import VantaToggle from '$lib/VantaToggle.svelte';
+
+	const { data, children } = $props();
 
 	// vercel web analytics + speed insights
 	injectAnalytics({ mode: dev ? 'development' : 'production' });
 	injectSpeedInsights();
 
+	// initialize state from local storage and add hooks to save on changes
+	loadFromLocalStorage(internal_state);
+	$effect(() => {
+		saveToLocalStorage(internal_state);
+	});
+
+	// gsap flip plugin
 	gsap.registerPlugin(Flip);
 
-	const { data, children } = $props();
-
+	// vanta-related logic
 	let usingVanta = $state(false);
-	let vantaDestroyTimeoutID = $state<number>(0);
-	let vantaEffect: WAVES = $state(undefined);
+	let vantaDestroyTimeoutID: number;
+	let vantaEffect: WAVES | undefined;
 
 	const createVantaEffect = () => {
 		vantaEffect = WAVES({
@@ -38,11 +53,33 @@
 	};
 
 	const shouldUseVanta = $derived(() => {
-		return data.pathname.match(/^(\/resume|\/blog)/) === null;
+		return (
+			data.pathname.match(/^(\/resume|\/blog)/) === null &&
+			internal_state.isVantaUserEnabled &&
+			!internal_state.isUserMobile // disable on mobile for performance (animations don't fully work anyway)
+		);
+	});
+
+	$effect(() => {
+		// check if we should destroy the vanta background instance
+		if (!shouldUseVanta() && usingVanta) {
+			// if entering into a page that doesn't show vanta, destroy the instance
+			usingVanta = false;
+			vantaDestroyTimeoutID = setTimeout(() => {
+				vantaEffect.destroy();
+				vantaEffect = undefined;
+			}, 2000); // we wait for transitions to complete before destroying
+		} else if (shouldUseVanta() && !usingVanta) {
+			usingVanta = true;
+			// recreate the effect if it was destroyed, otherwise clear the timeout to destroy it
+			vantaEffect === undefined ? createVantaEffect() : clearTimeout(vantaDestroyTimeoutID);
+		}
 	});
 
 	// init vanta effect
 	onMount(() => {
+		// check if user is using mobile device (needed for some component styling)
+		internal_state.isUserMobile = internal_state.isUserMobile ?? isMobile();
 		if (shouldUseVanta()) {
 			usingVanta = true;
 			createVantaEffect();
@@ -77,20 +114,6 @@
 			}, 100);
 		}
 
-		// check if we should destroy the vanta background instance
-		if (!shouldUseVanta() && usingVanta) {
-			// if entering into a page that doesn't show vanta, destroy the instance
-			usingVanta = false;
-			vantaDestroyTimeoutID = setTimeout(() => {
-				vantaEffect.destroy();
-				vantaEffect = undefined;
-			}, 2000); // we wait for transitions to complete before destroying
-		} else if (shouldUseVanta() && !usingVanta) {
-			usingVanta = true;
-			// recreate the effect if it was destroyed, otherwise clear the timeout to destroy it
-			vantaEffect === undefined ? createVantaEffect() : clearTimeout(vantaDestroyTimeoutID);
-		}
-
 		// check if we need to flip anything
 		if (flipState.active) {
 			const currFlipState = flipState.get();
@@ -115,6 +138,7 @@
 ></div>
 <div class="transition-container relative overflow-hidden">
 	<Nav />
+	<VantaToggle />
 	{#key data.pathname}
 		<main
 			class="child:py-24 px-[10vw] max-[1921px]:px-12 max-sm:px-6"

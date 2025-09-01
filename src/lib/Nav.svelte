@@ -2,6 +2,8 @@
 	import { page } from '$app/state';
 	import { fly } from 'svelte/transition';
 	import { anim_link_tw } from './animLink';
+	import { onMount } from 'svelte';
+	import gsap from 'gsap';
 
 	// Create a derived store for breadcrumb segments
 	const breadcrumbs = $derived.by(() => {
@@ -17,6 +19,8 @@
 		});
 	});
 
+	let mounted = $state(false);
+
 	$effect(() => {
 		// when page URL changes, ensure we scroll nav to right
 		page.url.pathname;
@@ -26,18 +30,30 @@
 		}
 	});
 
+	onMount(() => {
+		gsap.fromTo(
+			'nav',
+			{ y: -100, autoAlpha: 0 },
+			{ y: 0, autoAlpha: 1, ease: 'circ.out', duration: 0.5 }
+		);
+		mounted = true;
+	});
+
 	const breadcrumb_separator_tw = 'px-1.5 font-light text-gray-50';
-	const background_skew_tw =
-		'bg-navy -skew-x-[20deg] child:skew-x-[20deg] pl-2 pr-5 drop-shadow-[0_5px_5px_rgba(0,0,0,0.25)]';
+	const background_skew_bc_tw =
+		'bg-navy -skew-x-[20deg] child:skew-x-[20deg] drop-shadow-[0_5px_5px_rgba(0,0,0,0.25)]';
 </script>
 
 {#if !['/', '/resume'].includes(page.url.pathname)}
+	<!-- breadcrumb -->
 	<nav
 		transition:fly={{ x: -50, duration: 200 }}
-		class="no-scrollbar fixed z-10 w-full overflow-x-auto scroll-smooth pb-5 text-lg text-gray-300 sm:text-xl"
+		class="no-scrollbar fixed z-10 w-full overflow-x-auto scroll-smooth pb-5 text-lg text-gray-300 sm:text-xl {mounted
+			? 'visible'
+			: 'invisible'}"
 	>
 		<ul
-			class="m-0 flex w-fit list-none items-center px-0 py-1 whitespace-nowrap select-none {background_skew_tw}"
+			class="m-0 flex w-fit list-none items-center px-0 py-1 pr-5 pl-2 whitespace-nowrap select-none {background_skew_bc_tw}"
 		>
 			<li class={breadcrumb_separator_tw}>/</li>
 			<li>
