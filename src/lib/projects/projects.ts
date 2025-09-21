@@ -16,6 +16,23 @@ const rawImgImports = import.meta.glob('$lib/assets/projects/*.{png,gif}', {
 });
 export const rawImgs = importsToMap(rawImgImports);
 
+// Simple preloader for raw images used on project detail pages.
+// Keeps a set of keys we've already started loading to avoid duplicate work.
+const _preloaded = new Set<string>();
+
+export function preloadRawImage(image_key: string) {
+	if (typeof window === 'undefined') return; // SSR safe
+	if (!image_key || _preloaded.has(image_key)) return;
+	const url = rawImgs[image_key];
+	if (!url) return;
+	const img = new Image();
+	// prefer async decoding
+	// @ts-ignore (Image.decoding is widely supported but TS lib may not include it)
+	img.decoding = 'async';
+	img.onload = () => _preloaded.add(image_key);
+	img.src = url;
+}
+
 // object keys are their respective UIDs
 export const projects: Record<string, Omit<ProjectMetaData, 'uid'>> = {
 	lc3tools: {
