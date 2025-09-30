@@ -24,7 +24,7 @@ interface BlogMetadata {
 async function generateBlogMetadata() {
 	try {
 		// Path to the blog assets directory
-		const blogAssetsPath = join(__dirname, '../assets/blog');
+		const blogAssetsPath = join(__dirname, '../src/lib/assets/blog');
 
 		// Read all files in the blog directory
 		const files = await readdir(blogAssetsPath);
@@ -71,7 +71,7 @@ async function generateBlogMetadata() {
 		const generatedContent = generateTypeScriptContent(blogMetadataMap);
 
 		// Write to the generated file
-		const outputPath = join(__dirname, 'blogMetadata.generated.ts');
+		const outputPath = join(__dirname, '../src/lib/blog/blogMetadata.generated.ts');
 		await writeFile(outputPath, generatedContent, 'utf-8');
 
 		console.log(
