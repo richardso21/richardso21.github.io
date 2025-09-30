@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { state as internal_state } from './state.svelte';
+	import { state as internal_state } from '$lib/util/state.svelte';
 	import { onMount } from 'svelte';
 	import gsap from 'gsap';
 	import { page } from '$app/state';

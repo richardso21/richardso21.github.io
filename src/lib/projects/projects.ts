@@ -1,5 +1,5 @@
-import { md_link as link } from '$lib/linkStyles';
-import { importsToMap } from '$lib/links';
+import { md_link as link } from '$lib/util/linkStyles';
+import { importsToMap } from '$lib/homeLinks';
 import type { ProjectMetaData } from './projects.types';
 
 // Build a map from bare filename (e.g., 'site.png') to the enhanced image URL/module

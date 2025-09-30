@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { flipState } from '$lib/state.svelte.js';
+	import { flipState } from '$lib/util/state.svelte.js';
 	import { rawImgs } from '$lib/projects/projects.js';
 	import { gsap } from 'gsap';
 	import { marked } from 'marked';

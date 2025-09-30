@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { state } from '$lib/state.svelte';
+	import { state } from '$lib/util/state.svelte';
 	import { optImgs, preloadRawImage } from './projects';
 	import type { ProjectMetaData } from './projects.types';
 	import { onMount, onDestroy } from 'svelte';

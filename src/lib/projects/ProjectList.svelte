@@ -3,7 +3,7 @@
 	import { gsap } from 'gsap';
 	import type { ProjectMetaData } from './projects.types';
 	import ProjectItem from './ProjectItem.svelte';
-	import { flipState } from '$lib/state.svelte';
+	import { flipState } from '$lib/util/state.svelte';
 
 	let { projects, tl = $bindable() }: { projects: Array<ProjectMetaData>; tl: gsap.core.Timeline } =
 		$props();

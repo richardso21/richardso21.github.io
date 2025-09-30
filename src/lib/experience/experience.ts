@@ -1,6 +1,6 @@
-import { md_link as link } from '$lib/linkStyles';
+import { md_link as link } from '$lib/util/linkStyles';
 import type { ExperienceMetaData } from '$lib/experience/experience.types';
-import { importsToMap } from '$lib/links';
+import { importsToMap } from '$lib/homeLinks';
 
 const iconImports = import.meta.glob('$lib/assets/experience/*.{png,gif}', {
 	eager: true,

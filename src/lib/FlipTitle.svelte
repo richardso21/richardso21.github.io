@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { gsap } from 'gsap';
 	import { onMount, type Snippet } from 'svelte';
-	import { flipState } from '$lib/state.svelte';
+	import { flipState } from '$lib/util/state.svelte';
 
 	let {
 		children,

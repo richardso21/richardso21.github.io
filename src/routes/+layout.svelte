@@ -14,14 +14,14 @@
 	import WAVES from 'vanta/dist/vanta.waves.min';
 
 	import { afterNavigate, beforeNavigate } from '$app/navigation';
-	import Nav from '$lib/Nav.svelte';
+	import Nav from '$lib/layout/Nav.svelte';
 	import {
 		flipState,
 		state as internal_state,
 		loadFromLocalStorage,
 		saveToLocalStorage
-	} from '$lib/state.svelte';
-	import VantaToggle from '$lib/VantaToggle.svelte';
+	} from '$lib/util/state.svelte';
+	import VantaToggle from '$lib/layout/VantaToggle.svelte';
 
 	const { data, children } = $props();
 
@@ -141,7 +141,7 @@
 	<VantaToggle />
 	{#key data.pathname}
 		<main
-			class="child:py-24 px-[10vw] max-[1921px]:px-12 max-sm:px-6"
+			class="child:py-24 max-w-[100vw] px-[10vw] max-[1921px]:px-12 max-sm:px-6"
 			out:fade={{ duration: 150 }}
 			in:fade={{ duration: data.pathname === '/resume' ? 250 : 0 }}
 		>
