@@ -27,3 +27,22 @@
 @theme {
 	--color-navy: #111827;
 }
+
+/* Make background of scrollbar transparent */
+/* Safari */
+::-webkit-scrollbar {
+	width: 8px;
+}
+::-webkit-scrollbar-track {
+	background: var(--color-gray-800);
+}
+::-webkit-scrollbar-thumb {
+	background-color: oklch(from var(--color-blue-400) l c h / 0.5);
+	border-radius: 4px;
+}
+
+/* Most browsers */
+html {
+	scrollbar-width: thin;
+	scrollbar-color: oklch(from var(--color-blue-400) l c h / 0.5) var(--color-gray-800);
+}

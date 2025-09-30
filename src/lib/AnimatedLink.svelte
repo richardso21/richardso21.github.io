@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { anim_link_hero_tw } from './animLink';
+	import { anim_link_hero_tw } from './linkStyles';
 	import type { LinkMetaData } from './links';
 
 	const { link, new_page = false }: { link: LinkMetaData; new_page?: boolean } = $props();

@@ -1,4 +1,4 @@
-import { md_link as link } from '$lib/animLink';
+import { md_link as link } from '$lib/linkStyles';
 import { importsToMap } from '$lib/links';
 import type { ProjectMetaData } from './projects.types';
 
@@ -158,23 +158,23 @@ Found a **10%** F1 score improvement on extremely sparse datasets (w/ ResNet-50)
 _View the final report_
 ${link('here', 'https://richardso21.github.io/controlnet-augmentation/2024/04/20/final-project.html')}
 `
-	},
-	this_site: {
-		title: 'sorichard.com',
-		tech_stack: ['SvelteKit', 'GSAP', 'Tailwind'],
-		date: new Date(2025, 7),
-		image_url: 'site.png',
-		details: `
-My portfolio website, not only to showcase my experience/projects, but also my
-ability to **craft a delightful web UX** with modern frameworks.
-
-Built with **Typescript** and **SvelteKit**. All stylings (using Tailwind) are
-**fully responsive and custom**, borrowing components is lame. Animations
-done with **GSAP Flip**. Only thing I can credit is
-${link('Vanta', 'https://github.com/tengbao/vanta')} for the amazing
-background effects.
-
-_Want to visit this site? You're already here!_
-`
 	}
+	// 	this_site: {
+	// 		title: 'sorichard.com',
+	// 		tech_stack: ['SvelteKit', 'GSAP', 'Tailwind'],
+	// 		date: new Date(2025, 7),
+	// 		image_url: 'site.png',
+	// 		details: `
+	// My portfolio website, not only to showcase my experience/projects, but also my
+	// ability to **craft a delightful web UX** with modern frameworks.
+
+	// Built with **Typescript** and **SvelteKit**. All stylings (using Tailwind) are
+	// **fully responsive and custom**, borrowing components is lame. Animations
+	// done with **GSAP Flip**. Only thing I can credit is
+	// ${link('Vanta', 'https://github.com/tengbao/vanta')} for the amazing
+	// background effects.
+
+	// _Want to visit this site? You're already here!_
+	// `
+	// 	}
 };

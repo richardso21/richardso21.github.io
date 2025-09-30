@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import { fly } from 'svelte/transition';
-	import { anim_link_tw } from './animLink';
+	import { anim_link_tw } from './linkStyles';
 	import { onMount } from 'svelte';
 	import gsap from 'gsap';
 

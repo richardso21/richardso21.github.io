@@ -1,0 +1,4 @@
+{
+	// enable tailwindcss intellisense for all variables ending with '_tw'
+	"tailwindCSS.classAttributes": ["class", "className", "ngClass", "class:list", ".*_tw"]
+}

@@ -1,4 +1,4 @@
-import { md_link as link } from '$lib/animLink';
+import { md_link as link } from '$lib/linkStyles';
 import type { ExperienceMetaData } from '$lib/experience/experience.types';
 import { importsToMap } from '$lib/links';
 
