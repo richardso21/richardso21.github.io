@@ -1,0 +1,2 @@
+pnpm register-blogs
+git add src/lib/blog/blogMetadata.generated.ts

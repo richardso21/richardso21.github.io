@@ -1,4 +1,5 @@
 import type { Config } from 'tailwindcss';
+import typography from '@tailwindcss/typography';
 
 export default {
 	content: ['./src/**/*.{html,js,svelte,ts}'],
@@ -18,7 +19,8 @@ export default {
 	},
 
 	plugins: [
-		function ({ addVariant }) {
+		typography,
+		function ({ addVariant }: any) {
 			addVariant('child', '& > *');
 		}
 	]
