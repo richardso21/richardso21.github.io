@@ -29,11 +29,9 @@
 	});
 
 	// blog styling
-	const h1_tw =
-		'prose-h1:text-4xl prose-h1:font-bold prose-h1:text-white prose-h1:sm:text-5xl prose-h1:md:text-6xl prose-h1:py-5';
 	const pre_code_tw = '[&_pre]:p-0 [&_pre]:m-0 [&_pre]:rounded-t-none';
 	const prose_tw = 'prose prose-lg md:prose-xl 2xl:prose-2xl max-w-full prose-invert';
-	const article_tw = `${prose_tw} ${pre_code_tw} ${h1_tw}`;
+	const article_tw = `${prose_tw} ${pre_code_tw}`;
 </script>
 
 <svelte:head>
@@ -44,6 +42,20 @@
 
 <div class="relative w-full xl:w-3/4 2xl:mx-auto 2xl:w-7/12">
 	<article class={article_tw} use:enhanceMarkdownCodeBlocks>
+		<h1 class="not-prose mb-0 py-2 text-4xl font-bold text-white sm:text-5xl md:text-6xl">
+			{blogMetadata.title}
+		</h1>
+		<p class="not-prose my-0 py-2 text-xl text-blue-300 italic sm:text-2xl md:text-3xl">
+			{blogMetadata.description}
+		</p>
+		<p class="not-prose text-md py-2 text-gray-500 sm:text-lg md:text-xl">
+			{new Date(blogMetadata.date).toLocaleDateString(undefined, {
+				year: 'numeric',
+				month: 'long',
+				day: 'numeric'
+			})}
+		</p>
+		<hr class="not-prose mt-5 mb-10 border-t border-gray-700" />
 		{@html marked.parse(blogContent, { async: false, gfm: true })}
 	</article>
 </div>
