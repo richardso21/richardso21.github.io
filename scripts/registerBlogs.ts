@@ -91,7 +91,9 @@ function generateTypeScriptContent(blogMetadataMap: Record<string, BlogMetadata>
 			const dateObj = new Date(metadata.date);
 			const year = dateObj.getFullYear();
 			const month = dateObj.getMonth(); // 0-indexed
-			const day = dateObj.getDate();
+			// Use getUTCDate to avoid timezone issues from parsed object (getDate
+			// gives you the local date which can be off by one day depending on tz)
+			const day = dateObj.getUTCDate();
 
 			return `\t'${key}': {
 \t\ttitle: '${escapeString(metadata.title)}',
