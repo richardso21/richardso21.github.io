@@ -71,7 +71,7 @@
 		Richard So
 	</h1>
 	<h3 class="gsap-reveal pt-2 text-xl text-gray-400 italic sm:pt-0 md:text-2xl">
-		AI/ML, Cloud, Full Stack,
+		AI/ML, cloud, full stack,
 		<br class="block sm:hidden" />
 		all things code
 	</h3>

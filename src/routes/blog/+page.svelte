@@ -58,7 +58,7 @@
 {/snippet}
 
 <svelte:head>
-	<title>Blog | Richard So</title>
+	<title>blog | Richard So</title>
 </svelte:head>
 <div>
 	<div class="pb-10">

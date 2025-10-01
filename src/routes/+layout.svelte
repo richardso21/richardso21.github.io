@@ -65,7 +65,7 @@
 		if (!shouldUseVanta() && usingVanta) {
 			// if entering into a page that doesn't show vanta, destroy the instance
 			usingVanta = false;
-			vantaDestroyTimeoutID = setTimeout(() => {
+			vantaDestroyTimeoutID = window.setTimeout(() => {
 				vantaEffect.destroy();
 				vantaEffect = undefined;
 			}, 2000); // we wait for transitions to complete before destroying

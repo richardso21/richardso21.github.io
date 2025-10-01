@@ -6,30 +6,30 @@ export type LinkMetaData = {
 export const site_links: Array<LinkMetaData> = [
 	{
 		href: '/experience',
-		text: 'Experience'
+		text: 'experience'
 	},
 	{
 		href: '/projects',
-		text: 'Projects'
+		text: 'projects'
 	},
 	{
 		href: '/resume',
-		text: 'Resume'
+		text: 'resume'
 	},
 	{
 		href: '/blog',
-		text: 'Blog'
+		text: 'blog'
 	}
 ];
 
 export const external_links: Array<LinkMetaData> = [
 	{
 		href: 'https://www.linkedin.com/in/richardso21',
-		text: 'LinkedIn'
+		text: 'linkedIn'
 	},
 	{
 		href: 'https://github.com/richardso21',
-		text: 'GitHub'
+		text: 'gitHub'
 	}
 ];
 

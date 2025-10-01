@@ -36,7 +36,7 @@
 			class="group cursor-pointer {background_skew_vt_tw} text-md pt-1.5 pr-3 pb-1.5 pl-4 transition-all hover:scale-110 active:scale-105"
 			onclick={toggleVanta}
 		>
-			<span class="font-light">Background</span>
+			<span class="font-light">background</span>
 			<span class={internal_state.isVantaUserEnabled ? option_disabled_tw : option_enabled_tw}
 				>OFF</span
 			><span class="px-[3px]">/</span><span

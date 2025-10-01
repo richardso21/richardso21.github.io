@@ -29,12 +29,12 @@
 </script>
 
 <svelte:head>
-	<title>Projects | Richard So</title>
+	<title>projects | Richard So</title>
 </svelte:head>
 
 <div>
 	<div class="pb-10">
-		<FlipTitle flip_id="/projects" {tl}>Projects</FlipTitle>
+		<FlipTitle flip_id="/projects" {tl}>projects</FlipTitle>
 	</div>
 	<ProjectList bind:tl={proj_list_tl} projects={projects_arr} />
 </div>
