@@ -1,10 +1,15 @@
+import { state } from '$lib/util/state.svelte';
+
+const isUserMobile = state.isUserMobile;
+
 // codeblock tailwind styles
-const code_wrapper_tw = 'code-block-wrapper mb-4';
-const code_bar_tw =
-	'flex items-center justify-between bg-slate-800 text-slate-100 text-xs sm:text-sm px-2 py-1 rounded-t-md';
-const code_lang_tw = 'font-bold';
-const code_copy_btn_tw = 'ml-2 px-2 py-0.5 rounded bg-slate-700 hover:bg-slate-600 cursor-pointer';
-const code_pre_tw = 'rounded-b-md overflow-x-auto';
+const code_wrapper_tw = 'code-block-wrapper relative overflow-y-hidden';
+const text_tw = 'absolute text-slate-100 bg-slate-800/90 text-sm px-2 py-1 backdrop-blur-sm z-10';
+const code_copy_btn_tw = `${text_tw} ${isUserMobile ? 'top-0' : '-top-10'} right-0 rounded-bl rounded-tr hover:bg-slate-700/90 cursor-pointer transition-all`;
+const code_lang_tw = `${text_tw} bottom-0 right-0 italic font-bold rounded-tl rounded-br`;
+
+// track hover timeout for stable rapid mouseenter/mouseleave events
+let hoverTimeout: NodeJS.Timeout | null = null;
 
 /**
  * Enhance code blocks rendered by marked inside the given root (defaults to the article element).
@@ -32,49 +37,56 @@ export const enhanceMarkdownCodeBlocks = (article: HTMLElement | null) => {
 			(codeEl.className || '').match(/lang-([^\s]+)/);
 		const lang = langMatch ? langMatch[1] : 'text';
 
-		// wrapper that holds the bar + pre
+		// wrapper that holds the pre with copy and language overlay
 		const wrapper = document.createElement('div');
 		wrapper.className = code_wrapper_tw;
-
-		// top bar showing language and copy buttons
-		const bar = document.createElement('div');
-		bar.className = code_bar_tw;
-
-		const langSpan = document.createElement('span');
-		langSpan.className = code_lang_tw;
-		langSpan.textContent = lang.toUpperCase();
 
 		const copyBtn = document.createElement('button');
 		copyBtn.type = 'button';
 		copyBtn.className = code_copy_btn_tw;
 		copyBtn.setAttribute('aria-label', `Copy ${lang} code`);
-		copyBtn.textContent = 'Copy';
+		copyBtn.textContent = 'copy';
 
-		bar.appendChild(langSpan);
-		bar.appendChild(copyBtn);
+		// language label positioned at bottom right corner
+		const langSpan = document.createElement('span');
+		langSpan.className = code_lang_tw;
+		langSpan.textContent = lang;
 
-		// insert wrapper before pre, then move pre inside wrapper
+		// insert wrapper before pre, then move pre inside wrapper and add copy button + language
 		preEl.parentNode?.insertBefore(wrapper, preEl);
-		wrapper.appendChild(bar);
 		wrapper.appendChild(preEl);
+		wrapper.appendChild(copyBtn);
+		wrapper.appendChild(langSpan);
 
-		// style pre to match the bar (rounded bottom + horizontal scroll)
-		preEl.classList.add(...code_pre_tw.split(' '));
+		if (!state.isUserMobile) {
+			wrapper.addEventListener('mouseenter', () => {
+				hoverTimeout && clearTimeout(hoverTimeout);
+				copyBtn.classList.remove('-top-10');
+				copyBtn.classList.add('top-0');
+			});
+
+			wrapper.addEventListener('mouseleave', () => {
+				hoverTimeout = setTimeout(() => {
+					copyBtn.classList.remove('top-0');
+					copyBtn.classList.add('-top-10');
+				}, 500);
+			});
+		}
 
 		// copy handler
 		copyBtn.addEventListener('click', async () => {
 			try {
 				await navigator.clipboard.writeText(codeEl.textContent);
-				copyBtn.textContent = 'Copied';
+				copyBtn.textContent = 'copied';
 				copyBtn.setAttribute('disabled', 'true');
 				// reset
 				setTimeout(() => {
-					copyBtn.textContent = 'Copy';
+					copyBtn.textContent = 'copy';
 					copyBtn.removeAttribute('disabled');
 				}, 1400);
 			} catch (err) {
 				copyBtn.textContent = 'Failed';
-				setTimeout(() => (copyBtn.textContent = 'Copy'), 1400);
+				setTimeout(() => (copyBtn.textContent = 'copy'), 1400);
 			}
 		});
 

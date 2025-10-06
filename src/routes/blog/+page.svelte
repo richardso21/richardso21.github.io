@@ -20,7 +20,7 @@
 			{
 				x: -200,
 				autoAlpha: 0,
-				stagger: 0.15,
+				stagger: 0.1,
 				duration: 0.5,
 				ease: 'circ.out'
 			},

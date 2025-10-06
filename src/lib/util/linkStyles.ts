@@ -1,8 +1,8 @@
-const anim_link_base_tw =
-	'transition ease-out hover:animate-pulse hover:skew-x-0 active:text-blue-400 cursor-pointer';
+const link_base_tw = 'underline-offset-2 transition ease-out active:text-blue-400 cursor-pointer';
 
-const anim_link_base_group_tw =
-	'transition ease-out group-hover:animate-pulse group-hover:skew-x-0 active:text-blue-400 cursor-pointer';
+const anim_link_base_tw = `${link_base_tw} hover:animate-pulse hover:skew-x-0`;
+
+const anim_link_base_group_tw = `${link_base_tw} group-hover:animate-pulse group-hover:skew-x-0`;
 
 export const anim_link_hero_tw = `${anim_link_base_tw} -skew-x-12 hover:scale-125 active:scale-110`;
 export const anim_link_tw = `${anim_link_base_tw} -skew-x-12 hover:scale-[102%] active:scale-95`;

@@ -1,35 +1,59 @@
 <script lang="ts">
-	import { marked } from 'marked';
+	import { marked, type Tokens } from 'marked';
 	import { onMount } from 'svelte';
 	import fm from 'front-matter';
 	import { gsap } from 'gsap';
 	import { enhanceMarkdownCodeBlocks } from '$lib/blog/codeBlocks.js';
+	import { anim_link_tw } from '$lib/util/linkStyles.js';
 
 	const { data } = $props();
 	const { blogContent, blogMetadata } = data;
 
-	const hooks = {
-		preprocess(markdown: string) {
+	// customizations to our markdown renderer
+	marked.use({
+		hooks: {
 			// only process the body of the markdown file
-			const { body } = fm(markdown);
-			return body;
-		}
-	};
-	marked.use({ hooks });
-
-	onMount(() => {
-		const article = document.querySelector('article');
-
-		// animate article blocks into view with a small stagger
-		if (article) {
-			const nodes = Array.from(article.children) as HTMLElement[];
-			gsap.set(nodes, { autoAlpha: 0, y: 50 });
-			gsap.to(nodes, { autoAlpha: 1, y: 0, stagger: 0.075, duration: 0.5, ease: 'circ.out' });
+			preprocess: (markdown: string) => fm(markdown).body
+		},
+		renderer: {
+			// custom headings with anchor link
+			heading(args: Tokens.Heading) {
+				const { text, depth } = args;
+				const escapedText = text.toLowerCase().replace(/[^\w]+/g, '-');
+				// extra invisible anchor to respect the heading's margin
+				return `
+				<div class="header-anchor inline-block">
+					<a name="${escapedText}"></a>
+					<h${depth}>
+						<a class="anchor no-underline font-bold" href="#${escapedText}">
+							${'#'.repeat(depth)} ${text}
+						</a>
+					</h${depth}>
+				</div>
+				`.trim();
+			},
+			// anchor links open on new pages, with styling
+			link(args: Tokens.Link) {
+				const { href, text } = args;
+				return `
+				<span class="${anim_link_tw} inline-block">
+					<a href="${href}" target="_blank" rel="noopener" class="inline-block">${text}</a>
+				</span>
+				`.trim();
+			}
 		}
 	});
 
+	onMount(async () => {
+		// animate article blocks into view with a small stagger
+		const article = document.querySelector('article');
+		const nodes = Array.from(article!.children) as HTMLElement[];
+		gsap.set(nodes, { autoAlpha: 0, y: 50 });
+		gsap.to(nodes, { autoAlpha: 1, y: 0, stagger: 0.075, duration: 0.5, ease: 'circ.out' });
+	});
+
 	// blog styling
-	const pre_code_tw = '[&_pre]:p-0 [&_pre]:m-0 [&_pre]:rounded-t-none';
+	const pre_code_tw = '[&_pre]:p-0 [&_pre]:m-0';
 	const prose_tw = 'prose prose-lg md:prose-xl 2xl:prose-2xl max-w-full prose-invert';
 	const article_tw = `${prose_tw} ${pre_code_tw}`;
 </script>
