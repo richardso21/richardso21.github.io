@@ -11,13 +11,13 @@ const __dirname = dirname(__filename);
 
 interface BlogFrontMatter {
 	title: string;
-	description: string;
+	description?: string;
 	date: string;
 }
 
 interface BlogMetadata {
 	title: string;
-	description: string;
+	description?: string;
 	date: string; // We'll keep it as string in the generated file for Date constructor
 }
 
@@ -30,7 +30,10 @@ async function generateBlogMetadata() {
 		const files = await readdir(blogAssetsPath);
 
 		// Filter for markdown files
-		const markdownFiles = files.filter((file: string) => file.endsWith('.md'));
+		// Exclude files ending with .wip.md as they are work in progress
+		const markdownFiles = files.filter(
+			(file: string) => file.endsWith('.md') && !file.endsWith('.wip.md')
+		);
 
 		console.log(`Found ${markdownFiles.length} markdown files`);
 
@@ -47,7 +50,7 @@ async function generateBlogMetadata() {
 				const { title, description, date } = parsed.attributes;
 
 				// Validate required fields
-				if (!title || !description || !date) {
+				if (!title || !date) {
 					console.warn(`Warning: Missing required front matter in ${file}. Skipping.`);
 					continue;
 				}
@@ -97,7 +100,7 @@ function generateTypeScriptContent(blogMetadataMap: Record<string, BlogMetadata>
 
 			return `\t'${key}': {
 \t\ttitle: '${escapeString(metadata.title)}',
-\t\tdescription: '${escapeString(metadata.description)}',
+\t\tdescription: '${escapeString(metadata.description || '')}',
 \t\tdate: new Date(${year}, ${month}, ${day})
 \t}`;
 		})

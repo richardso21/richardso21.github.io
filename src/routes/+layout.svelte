@@ -8,6 +8,7 @@
 	import { fade } from 'svelte/transition';
 	import * as THREE from 'three';
 	import { gsap } from 'gsap';
+	import { SplitText } from 'gsap/all';
 	import { Flip } from 'gsap/Flip';
 	import { isMobile } from 'is-mobile';
 	// @ts-ignore
@@ -35,8 +36,9 @@
 		saveToLocalStorage(internal_state);
 	});
 
-	// gsap flip plugin
+	// register gsap plugins
 	gsap.registerPlugin(Flip);
+	gsap.registerPlugin(SplitText);
 
 	// vanta-related logic
 	let usingVanta = $state(false);
