@@ -16,7 +16,7 @@ export const experiences: Array<ExperienceMetaData> = [
 		start: new Date(2025, 7),
 		icon_url: 'amazon.png',
 		iconBackdrop: '#241F20',
-		details: []
+		details: '_**Brand Analytics, Seller Central**_'
 	},
 	{
 		org: 'D2I Lab @ Georgia Tech',
