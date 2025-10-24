@@ -4,4 +4,14 @@
 import type { BlogMetadata } from './blogMetadataType';
 
 export const blogMetadataMap: Record<string, BlogMetadata> = {
+	'my-website': {
+		title: 'why (and how) I made this website',
+		description: 'I spent way too much time on ts 🥀🥀',
+		date: new Date(2025, 9, 24)
+	},
+	'welcome': {
+		title: 'welcome!',
+		description: '',
+		date: new Date(2025, 9, 20)
+	}
 };
