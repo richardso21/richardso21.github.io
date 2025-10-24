@@ -1,9 +1,10 @@
 <script lang="ts">
 	import { marked, type Tokens } from 'marked';
-	import { onMount } from 'svelte';
+	import { onMount, tick } from 'svelte';
 	import fm from 'front-matter';
 	import { gsap } from 'gsap';
 	import { SplitText } from 'gsap/all';
+	import { viewportObserve } from '$lib/util/observe.js';
 	import { enhanceMarkdownCodeBlocks } from '$lib/blog/codeBlocks.js';
 	import { anim_link_tw } from '$lib/util/linkStyles.js';
 
@@ -47,24 +48,37 @@
 		}
 	});
 
+	let wordCount = $state(0);
+
 	onMount(async () => {
-		// animate article blocks into view with a small stagger
+		// Attach our IntersectionObserver-based reveal to each immediate child of the article.
+		// The markdown renderer injects raw HTML, so we attach programmatically.
+		const article = document.querySelector('article');
+		const nodes = Array.from(article?.children ?? []) as HTMLElement[];
+		// initially keep nodes hidden via CSS (opacity/transform)
+		nodes.forEach((node) => viewportObserve(node));
+
+		// count words
+		for (let i = 0; i < nodes.length; i++) {
+			wordCount += nodes[i].textContent.trim().split(/\s+/).length;
+		}
+		// wait for wordCount to update in DOM before animating title + metadata
+		await tick();
+
+		// animate article metadata into view with a small character stagger
 		new SplitText('.article-metadata', {
 			type: 'chars',
 			autoSplit: true,
-			onSplit: (self) =>
+			onSplit: (self) => {
 				gsap.from(self.chars, {
 					y: 50,
 					opacity: 0,
 					stagger: 0.01,
 					duration: 0.5,
 					ease: 'elastic.out(1, 0.9)'
-				})
+				});
+			}
 		});
-		const article = document.querySelector('article');
-		const nodes = Array.from(article!.children) as HTMLElement[];
-		gsap.set(nodes, { autoAlpha: 0, y: 50 });
-		gsap.to(nodes, { autoAlpha: 1, y: 0, stagger: 0.075, duration: 0.5, ease: 'circ.out' });
 	});
 
 	// blog styling
@@ -93,7 +107,7 @@
 					year: 'numeric',
 					month: 'long',
 					day: 'numeric'
-				})}
+				})} | {wordCount} words
 			</p>
 		</div>
 		<hr class="not-prose mt-5 mb-10 border-t border-gray-700" />
@@ -102,7 +116,23 @@
 </div>
 
 <style scoped>
+	/* Default state: elements start slightly rightwards and transparent. The observe
+   action will add the `reveal-in` class when they enter the viewport. */
 	article > :global(*) {
-		visibility: hidden;
+		opacity: 0;
+		transform: translateX(1.25rem);
+		transition:
+			opacity 420ms cubic-bezier(0.22, 0.9, 0.45, 1),
+			transform 420ms cubic-bezier(0.22, 0.9, 0.45, 1);
+	}
+
+	article > :global(.reveal-in) {
+		opacity: 1;
+		transform: translateX(0);
+	}
+
+	article > :global(.reveal-out) {
+		opacity: 0;
+		transform: translateX(1.25rem);
 	}
 </style>
