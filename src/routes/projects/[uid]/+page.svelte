@@ -4,6 +4,7 @@
 	import { gsap } from 'gsap';
 	import { marked } from 'marked';
 	import { onMount } from 'svelte';
+	import { SplitText } from 'gsap/all';
 	const { data } = $props();
 	const { project } = data;
 	const { title, image_url, uid, details } = project;
@@ -13,17 +14,26 @@
 	const tl = gsap.timeline();
 	onMount(() => {
 		// animate title
+		tl.fromTo('.pd-title', { autoAlpha: 0 }, { autoAlpha: 1, duration: 0, ease: 'circ.out' });
+		const splitTitle = new SplitText('.pd-title', { type: 'chars' });
 		tl.fromTo(
-			'.pd-title',
-			{ y: 200, autoAlpha: 0 },
-			{ y: 0, autoAlpha: 1, duration: 0.5, ease: 'circ.out' }
+			splitTitle.chars,
+			{ y: 50, autoAlpha: 0 },
+			{
+				y: 0,
+				autoAlpha: 1,
+				stagger: 0.02,
+				duration: 0.5,
+				ease: 'elastic.out(1, 0.9)'
+			}
 		);
+
 		// animate details
 		tl.fromTo(
 			'.pd-details',
 			{ x: -100, autoAlpha: 0 },
 			{ x: 0, autoAlpha: 1, duration: 0.5, ease: 'circ.out' },
-			'-=30%'
+			'>-70%'
 		);
 
 		// if we're not flipping, animate the image
@@ -32,7 +42,7 @@
 				'.pd-img',
 				{ x: 100, autoAlpha: 0 },
 				{ x: 0, autoAlpha: 1, duration: 0.5, ease: 'circ.out' },
-				'-=100%'
+				'<'
 			);
 		} else {
 			// toggle visibility immediately for flipping to work

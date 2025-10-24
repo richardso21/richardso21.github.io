@@ -13,7 +13,7 @@
 	tl = tl ?? gsap.timeline();
 	onMount(() => {
 		tl.fromTo('.explist', { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.35 });
-		child_tl.forEach((el) => tl.add(el, '-=65%'));
+		child_tl.forEach((el, i) => tl.add(el, i * 0.2));
 		tl.fromTo(
 			'.line',
 			{ height: 0, autoAlpha: 0 },

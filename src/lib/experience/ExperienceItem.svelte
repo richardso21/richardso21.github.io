@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { gsap } from 'gsap';
+	import { SplitText } from 'gsap/all';
 	import type { ExperienceMetaData } from './experience.types';
 	import { marked } from 'marked';
 	import { iconImgs } from './experience';
@@ -26,11 +27,37 @@
 			{ y: 100, autoAlpha: 0 },
 			{ y: 0, autoAlpha: 1, duration: 0.5, ease: 'circ.out' }
 		);
+		const splitTitle = new SplitText(`.experience-item-${key} > h2`, { type: 'chars' });
+		tl.fromTo(
+			splitTitle.chars,
+			{ y: 50, autoAlpha: 0 },
+			{
+				y: 0,
+				autoAlpha: 1,
+				stagger: 0.02,
+				duration: 0.5,
+				ease: 'elastic.out(1, 0.9)'
+			},
+			'<'
+		);
+		const splitRole = new SplitText(`.experience-item-${key} > h3`, { type: 'chars' });
+		tl.fromTo(
+			splitRole.chars,
+			{ y: 50, autoAlpha: 0 },
+			{
+				y: 0,
+				autoAlpha: 1,
+				stagger: 0.02,
+				duration: 0.5,
+				ease: 'elastic.out(1, 0.9)'
+			},
+			'<'
+		);
 		tl.fromTo(
 			`.experience-item-${key}-img`,
 			{ x: -100, autoAlpha: 0 },
 			{ x: 0, autoAlpha: 1, duration: 0.5, ease: 'circ.out' },
-			0
+			'<'
 		);
 	});
 </script>
@@ -58,12 +85,12 @@
 				{getDateString(experience.start)}
 			{/if}
 		</div>
-		<div class="text-2xl font-bold text-white sm:text-5xl">
+		<h2 class="text-2xl font-bold text-white sm:text-5xl">
 			{experience.org}
-		</div>
-		<div class="text-xl text-blue-300 italic sm:pt-2 sm:text-4xl">
+		</h2>
+		<h3 class="text-xl text-blue-300 italic sm:pt-2 sm:text-4xl">
 			{experience.role}
-		</div>
+		</h3>
 		<div
 			class="text-blue pt-5 text-lg text-gray-300 sm:text-2xl [&_li]:list-disc [&_li]:pb-2 [&_ul]:leading-relaxed"
 		>
