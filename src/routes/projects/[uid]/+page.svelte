@@ -15,7 +15,10 @@
 	onMount(() => {
 		// animate title
 		tl.fromTo('.pd-title', { autoAlpha: 0 }, { autoAlpha: 1, duration: 0, ease: 'circ.out' });
-		const splitTitle = new SplitText('.pd-title', { type: 'chars' });
+		const splitTitle = new SplitText('.pd-title', {
+			type: 'chars',
+			smartWrap: true
+		});
 		tl.fromTo(
 			splitTitle.chars,
 			{ y: 50, autoAlpha: 0 },
@@ -25,7 +28,8 @@
 				stagger: 0.02,
 				duration: 0.5,
 				ease: 'elastic.out(1, 0.9)'
-			}
+			},
+			0
 		);
 
 		// animate details

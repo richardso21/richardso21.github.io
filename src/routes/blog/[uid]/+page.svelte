@@ -4,6 +4,7 @@
 	import fm from 'front-matter';
 	import { gsap } from 'gsap';
 	import { SplitText } from 'gsap/all';
+	import Giscus from '@giscus/svelte';
 	import { viewportObserve } from '$lib/util/observe.js';
 	import { enhanceMarkdownCodeBlocks } from '$lib/blog/codeBlocks.js';
 	import { anim_link_tw } from '$lib/util/linkStyles.js';
@@ -69,6 +70,7 @@
 		new SplitText('.article-metadata', {
 			type: 'chars',
 			autoSplit: true,
+			smartWrap: true,
 			onSplit: (self) => {
 				gsap.from(self.chars, {
 					y: 50,
@@ -112,6 +114,25 @@
 		</div>
 		<hr class="not-prose mt-5 mb-10 border-t border-gray-700" />
 		{@html marked.parse(blogContent, { async: false, gfm: true })}
+		<hr class="border-2 border-gray-700" />
+		<div class="not-prose">
+			<Giscus
+				id="comments"
+				repo="richardso21/richardso21.github.io"
+				repoId="R_kgDOHriupA"
+				category="Announcements"
+				categoryId="DIC_kwDOHriupM4CxEzX"
+				mapping="pathname"
+				strict="0"
+				reactionsEnabled="1"
+				emitMetadata="0"
+				inputPosition="top"
+				theme="transparent_dark"
+				lang="en"
+				loading="lazy"
+				term=""
+			/>
+		</div>
 	</article>
 </div>
 

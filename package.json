@@ -39,6 +39,7 @@
 	},
 	"dependencies": {
 		"@fontsource-variable/inconsolata": "^5.2.6",
+		"@giscus/svelte": "^3.1.0",
 		"@tailwindcss/typography": "^0.5.19",
 		"@vercel/analytics": "^1.5.0",
 		"@vercel/speed-insights": "^1.2.0",

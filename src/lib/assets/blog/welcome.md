@@ -23,8 +23,6 @@ tell, I did a flawless job promoting my blog, gaining yet another loyal reader.
 
 I'll refuse to elaborate any further, in case you had any questions.
 
----
-
 _psst... this is your cue to read the rest of_ [my articles](/blog)_._
 
 <style>
