@@ -71,7 +71,7 @@
 			class="pd-img h-fit w-fit overflow-hidden rounded-md bg-gray-700 shadow-2xl"
 		>
 			<img
-				class="m-auto object-cover"
+				class="m-auto w-full object-cover"
 				src={rawImgs[image_url]}
 				alt=""
 				loading="lazy"
