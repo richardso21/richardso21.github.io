@@ -8,11 +8,13 @@
 
 	const tl = gsap.timeline();
 
-	// unpack map into array, inserting uid into each entry
-	const blogMetadataArr = Object.entries(blogMetadataMap).map(([uid, metadata]: [string, any]) => ({
-		uid,
-		...metadata
-	}));
+	// unpack map into array, insert uid into each entry, then sort by date descending
+	const blogMetadataArr = Object.entries(blogMetadataMap)
+		.map(([uid, metadata]: [string, any]) => ({
+			uid,
+			...metadata
+		}))
+		.sort((a, b) => b.date.getTime() - a.date.getTime());
 
 	onMount(() => {
 		tl.from(
