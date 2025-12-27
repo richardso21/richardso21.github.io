@@ -75,8 +75,9 @@
 	});
 </script>
 
+<!-- we will only flip the project image if we're on desktop -->
 <div
-	data-flip-id={href}
+	data-flip-id={state.isUserMobile ? undefined : href}
 	class="project-item relative h-[30vh] overflow-hidden rounded-md shadow-2xl"
 >
 	<a

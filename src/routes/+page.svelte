@@ -70,11 +70,12 @@
 	<h1 class="gsap-reveal-first text-[16vw] font-bold text-white sm:text-8xl md:text-9xl">
 		Richard So
 	</h1>
-	<h3 class="gsap-reveal pt-2 text-xl text-gray-400 italic sm:pt-0 md:text-2xl">
+	<h3 class="gsap-reveal py-2 text-xl text-gray-400 italic sm:pt-0 md:text-2xl">
 		AI/ML, cloud, full stack,
 		<br class="block sm:hidden" />
 		all things code
 	</h3>
+	<h4 class="gsap-reveal text-lg text-gray-500 italic sm:text-xl">Seattle, WA</h4>
 	<hr class="gsap-reveal my-8 w-60 sm:w-96" />
 	<div
 		class={'child:pb-5 child:self-start mb-5 flex flex-col text-2xl decoration-gray-300 underline-offset-2 sm:text-3xl'}

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { flipState } from '$lib/util/state.svelte.js';
+	import { flipState, state } from '$lib/util/state.svelte.js';
 	import { rawImgs } from '$lib/projects/projects.js';
 	import { gsap } from 'gsap';
 	import { marked } from 'marked';
@@ -40,8 +40,8 @@
 			'>-70%'
 		);
 
-		// if we're not flipping, animate the image
-		if (!flipState.active) {
+		// if we're not flipping, or if we're on mobile, animate the image
+		if (!flipState.active || state.isUserMobile) {
 			tl.fromTo(
 				'.pd-img',
 				{ x: 100, autoAlpha: 0 },
