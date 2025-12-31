@@ -12,11 +12,16 @@ export const iconImgs = importsToMap(iconImports);
 export const experiences: Array<ExperienceMetaData> = [
 	{
 		org: 'Amazon',
-		role: 'Current SDE',
+		role: 'Software Development Engineer',
 		start: new Date(2025, 7),
 		icon_url: 'amazon.png',
 		iconBackdrop: '#241F20',
-		details: '_**Brand Analytics, Seller Central**_'
+		// details: '_**Brand Analytics, Seller Central**_'
+		details: [
+			'Maintained **data lake infrastructure** for Amazon Brand Analytics, monitoring **sales performance for 2B+ products**.',
+			'Orchestrated pipelines to transform **\~100 TB/week** of raw purchase activity into curated datasets for analysis.',
+			"Developed an **explainable ML root cause analysis service** with **Shapley value feature attribution** to diagnose product underperformance in Amazon's catalog."
+		]
 	},
 	{
 		org: 'D2I Lab @ Georgia Tech',
@@ -25,9 +30,11 @@ export const experiences: Array<ExperienceMetaData> = [
 		icon_url: 'd2i.png',
 		iconBackdrop: 'white',
 		details: [
-			'Experimented new schemes for **faster, scalable LLM inference** in **retrieval-augmented generation** (RAG) workloads.',
+			'Experimented with latency reduction in **multi-tenant LLMs** by overlapping document retrieval and prefill stages.',
 			`Devised an **agentic web retrieval system** via reverse-engineering from SoTA commercial Deep Research products
-			_(e.g. **OpenAI, Grok, Perplexity**, etc.)_.`,
+			_(e.g. **OpenAI, Grok, Perplexity**, etc.)_ to benchmark our experiments under realistic workloads.`,
+			`Analyzed results for and **co-authored MLSys research paper** demonstrating
+			up to **11x lower latencies** in time-to-first-token (TTFT).`,
 			`Under the supervision of ${link('Dr. Kexin Rong', 'https://kexinrong.github.io/')} and
 			${link('Rajveer Bachkaniwala', 'https://www.rajveerbachkaniwala.com/')}.`
 		]
@@ -40,9 +47,13 @@ export const experiences: Array<ExperienceMetaData> = [
 		icon_url: 'amazon.png',
 		iconBackdrop: '#241F20',
 		details: [
-			'Analyzed developer experience across AWS through quantitative features extracted from recorded workflow sessions.',
-			'**Reduced runtime by >85%** of a data pipeline by leveraging a parallelized fork-join model with AWS Lambda functions.',
-			"Automated activity labeling of session screenshots using Amazon Rekognition, Textract, and Anthropic's Claude LLMs."
+			`Implemented **ML-driven analysis of developer workflows** to enable
+			quantitative DX comparison between cloud platforms and **drive AWS
+			roadmap decisions**.`,
+			`Re-architected a batch inference pipeline to exploit parallelism, **reducing
+			runtime by >85% (hours → minutes)**.`,
+			`Automated developer intent and task classification from desktop screenshots
+			using AWS **Rekognition**, **Textract**, and **multi-modal LLM prompting on Bedrock**.`
 		]
 	},
 	{
@@ -65,9 +76,13 @@ export const experiences: Array<ExperienceMetaData> = [
 		icon_url: 'tanium.png',
 		iconBackdrop: 'white',
 		details: [
-			'Implemented CRUD logging into a backend PostgreSQL database and REST API to elevate user visibility of Tanium Server.',
-			'Rapidly tackled **50+ feature/bug tickets** within a 10-week internship maintaining a Knex.js and React TypeScript codebase.',
-			'Exercised test-driven development and data validation best practices using Jest, Jasmine, and Joi.'
+			`Built CRUD logging to Tanium console's PostgreSQL backend and REST
+			endpoints to support a **customer-facing audit feature**, allowing review of
+			console activity and detection of unauthorized configuration changes.`,
+			`Resolved **50+ feature/bug tickets** within a 10-week internship maintaining
+			a Knex.js + React TypeScript codebase.`,
+			`Ensured code quality and correctness by applying **TDD + validation best
+			practices** using Jest, Jasmine, and Joi.`
 		]
 	}
 ];
