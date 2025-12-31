@@ -158,7 +158,13 @@
 		font-display: swap;
 		color: white;
 		background-color: #111827;
-		scroll-behavior: smooth;
+	}
+
+	/* only have smooth scroll on wider, larger screens */
+	@media screen and (width >= 40rem) {
+		:root {
+			scroll-behavior: smooth;
+		}
 	}
 
 	/* resolves issue with overlapping elements during transitions */
