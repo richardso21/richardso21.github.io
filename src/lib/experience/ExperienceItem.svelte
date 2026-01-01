@@ -27,7 +27,10 @@
 			{ y: 100, autoAlpha: 0 },
 			{ y: 0, autoAlpha: 1, duration: 0.5, ease: 'circ.out' }
 		);
-		const splitTitle = new SplitText(`.experience-item-${key} > h2`, { type: 'chars' });
+		const splitTitle = new SplitText(`.experience-item-${key} > h2`, {
+			type: 'chars',
+			smartWrap: true
+		});
 		tl.fromTo(
 			splitTitle.chars,
 			{ y: 50, autoAlpha: 0 },
@@ -40,7 +43,10 @@
 			},
 			'<'
 		);
-		const splitRole = new SplitText(`.experience-item-${key} > h3`, { type: 'chars' });
+		const splitRole = new SplitText(`.experience-item-${key} > h3`, {
+			type: 'chars',
+			smartWrap: true
+		});
 		tl.fromTo(
 			splitRole.chars,
 			{ y: 50, autoAlpha: 0 },
