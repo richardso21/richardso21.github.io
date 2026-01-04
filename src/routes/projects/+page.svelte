@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onDestroy, onMount } from 'svelte';
 	import { gsap } from 'gsap';
-	import FlipTitle from '$lib/FlipTitle.svelte';
+	import FlipTitle from '$lib/util/FlipTitle.svelte';
 	import ProjectList from '$lib/projects/ProjectList.svelte';
 	import { projects } from '$lib/projects/projects';
 	import type { ProjectMetaData } from '$lib/projects/projects.types';

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { anim_link_no_skew_group_tw } from '$lib/util/linkStyles';
 	import { blogMetadataMap } from '$lib/blog/blogs';
-	import FlipTitle from '$lib/FlipTitle.svelte';
+	import FlipTitle from '$lib/util/FlipTitle.svelte';
 	import { gsap } from 'gsap';
 	import { onMount } from 'svelte';
 	import { type BlogMetadata } from '$lib/blog/blogMetadataType';

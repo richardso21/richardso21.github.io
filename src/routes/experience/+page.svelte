@@ -2,7 +2,7 @@
 	import { onDestroy, onMount } from 'svelte';
 	import { gsap } from 'gsap';
 	import ExperienceList from '$lib/experience/ExperienceList.svelte';
-	import FlipTitle from '$lib/FlipTitle.svelte';
+	import FlipTitle from '$lib/util/FlipTitle.svelte';
 	import { experiences } from '$lib/experience/experience';
 
 	const tl = gsap.timeline();

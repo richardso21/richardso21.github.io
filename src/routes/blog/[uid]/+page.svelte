@@ -5,7 +5,6 @@
 	import { gsap } from 'gsap';
 	import { SplitText } from 'gsap/all';
 	import Giscus from '@giscus/svelte';
-	import { viewportObserve } from '$lib/util/observe.js';
 	import { enhanceMarkdownCodeBlocks } from '$lib/blog/codeBlocks.js';
 	import { anim_link_tw } from '$lib/util/linkStyles.js';
 
@@ -52,14 +51,16 @@
 	let wordCount = $state(0);
 
 	onMount(async () => {
-		// Attach our IntersectionObserver-based reveal to each immediate child of the article.
-		// The markdown renderer injects raw HTML, so we attach programmatically.
-		const article = document.querySelector('article');
-		const nodes = Array.from(article?.children ?? []) as HTMLElement[];
-		// initially keep nodes hidden via CSS (opacity/transform)
-		nodes.forEach((node) => viewportObserve(node));
+		// animate whole article into view
+		gsap.fromTo(
+			'article',
+			{ autoAlpha: 0, x: 150 },
+			{ autoAlpha: 1, x: 0, duration: 0.5, ease: 'circ.out' }
+		);
 
 		// count words
+		const article = document.querySelector('article');
+		const nodes = Array.from(article?.children ?? []) as HTMLElement[];
 		for (let i = 0; i < nodes.length; i++) {
 			wordCount += nodes[i].textContent.trim().split(/\s+/).length;
 		}
@@ -137,23 +138,7 @@
 </div>
 
 <style scoped>
-	/* Default state: elements start slightly rightwards and transparent. The observe
-   action will add the `reveal-in` class when they enter the viewport. */
-	article > :global(*) {
+	article {
 		opacity: 0;
-		transform: translateX(1.25rem);
-		transition:
-			opacity 420ms cubic-bezier(0.22, 0.9, 0.45, 1),
-			transform 420ms cubic-bezier(0.22, 0.9, 0.45, 1);
-	}
-
-	article > :global(.reveal-in) {
-		opacity: 1;
-		transform: translateX(0);
-	}
-
-	article > :global(.reveal-out) {
-		opacity: 0;
-		transform: translateX(1.25rem);
 	}
 </style>
