@@ -12,7 +12,7 @@
 		tl.add(exp_list_tl, '-=20%');
 	});
 	onDestroy(() => {
-		tl.kill();
+		tl.revert();
 	});
 </script>
 

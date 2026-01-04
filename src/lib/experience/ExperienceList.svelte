@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
+	import { onDestroy, onMount } from 'svelte';
 	import { gsap } from 'gsap';
 	import ExperienceItem from './ExperienceItem.svelte';
 	import type { ExperienceMetaData } from './experience.types';
@@ -12,14 +12,12 @@
 
 	tl = tl ?? gsap.timeline();
 	onMount(() => {
-		tl.fromTo('.explist', { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.35 });
+		tl.from('.explist', { autoAlpha: 0, duration: 0.35 });
 		child_tl.forEach((el, i) => tl.add(el, i * 0.2));
-		tl.fromTo(
-			'.line',
-			{ height: 0, autoAlpha: 0 },
-			{ height: '100%', autoAlpha: 1, duration: 1, ease: 'circ.inOut' },
-			0
-		);
+		tl.from('.line', { height: 0, autoAlpha: 0, duration: 1, ease: 'circ.inOut' }, 0);
+	});
+	onDestroy(() => {
+		tl.revert();
 	});
 </script>
 

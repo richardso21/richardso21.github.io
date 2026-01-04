@@ -5,14 +5,9 @@
 	import { external_links, site_links, type LinkMetaData } from '$lib/homeLinks';
 	import { anim_link_hero_tw } from '$lib/util/linkStyles';
 
-	const reveal_before = {
+	const reveal_anim_settings = {
 		y: 100,
-		autoAlpha: 0
-	};
-
-	const reveal_after = {
-		y: 0,
-		autoAlpha: 1,
+		autoAlpha: 0,
 		ease: 'circ.out',
 		stagger: 0.05,
 		duration: 0.5
@@ -27,11 +22,11 @@
 			const el = document.querySelector(`.gsap-reveal ${target}`)?.parentElement?.parentElement;
 			if (el) el.classList.remove('gsap-reveal');
 		}
-		tl.fromTo('.gsap-reveal-first', { ...reveal_before, y: 200 }, reveal_after);
-		tl.fromTo('.gsap-reveal', reveal_before, reveal_after, '-=15%');
+		tl.from('.gsap-reveal-first', { ...reveal_anim_settings, y: 200 });
+		tl.from('.gsap-reveal', reveal_anim_settings, '-=15%');
 	});
 	onDestroy(() => {
-		tl.kill();
+		tl.revert();
 	});
 </script>
 

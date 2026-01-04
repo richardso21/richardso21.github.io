@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
+	import { onDestroy, onMount } from 'svelte';
 	import { gsap } from 'gsap';
 	import { SplitText } from 'gsap/all';
 	import type { ExperienceMetaData } from './experience.types';
@@ -21,50 +21,35 @@
 		date.toLocaleDateString('default', { month: 'long', year: 'numeric' });
 
 	tl = tl ?? gsap.timeline();
+
 	onMount(() => {
-		tl.fromTo(
-			`.experience-item-${key}`,
-			{ y: 100, autoAlpha: 0 },
-			{ y: 0, autoAlpha: 1, duration: 0.5, ease: 'circ.out' }
-		);
+		tl.from(`.experience-item-${key}`, { y: 100, autoAlpha: 0, duration: 0.5, ease: 'circ.out' });
 		const splitTitle = new SplitText(`.experience-item-${key} > h2`, {
 			type: 'chars',
 			smartWrap: true
 		});
-		tl.fromTo(
+		tl.from(
 			splitTitle.chars,
-			{ y: 50, autoAlpha: 0 },
-			{
-				y: 0,
-				autoAlpha: 1,
-				stagger: 0.02,
-				duration: 0.5,
-				ease: 'elastic.out(1, 0.9)'
-			},
+			{ y: 50, autoAlpha: 0, stagger: 0.02, duration: 0.5, ease: 'elastic.out(1, 0.9)' },
 			'<'
 		);
 		const splitRole = new SplitText(`.experience-item-${key} > h3`, {
 			type: 'chars',
 			smartWrap: true
 		});
-		tl.fromTo(
+		tl.from(
 			splitRole.chars,
-			{ y: 50, autoAlpha: 0 },
-			{
-				y: 0,
-				autoAlpha: 1,
-				stagger: 0.02,
-				duration: 0.5,
-				ease: 'elastic.out(1, 0.9)'
-			},
+			{ y: 50, autoAlpha: 0, stagger: 0.02, duration: 0.5, ease: 'elastic.out(1, 0.9)' },
 			'<'
 		);
-		tl.fromTo(
+		tl.from(
 			`.experience-item-${key}-img`,
-			{ x: -100, autoAlpha: 0 },
-			{ x: 0, autoAlpha: 1, duration: 0.5, ease: 'circ.out' },
+			{ x: -100, autoAlpha: 0, duration: 0.5, ease: 'circ.out' },
 			'<'
 		);
+	});
+	onDestroy(() => {
+		tl.revert();
 	});
 </script>
 

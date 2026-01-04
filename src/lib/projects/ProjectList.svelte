@@ -9,18 +9,6 @@
 		$props();
 
 	tl = tl ?? gsap.timeline();
-	const reveal_before = {
-		y: 100,
-		autoAlpha: 0
-	};
-
-	const reveal_after = {
-		y: 0,
-		autoAlpha: 1,
-		ease: 'circ.out',
-		stagger: 0.1,
-		duration: 0.5
-	};
 
 	onMount(() => {
 		if (flipState.active) {
@@ -30,10 +18,14 @@
 
 			if (el) el.classList.remove('project-item');
 		}
-		tl.fromTo('.project-item', reveal_before, reveal_after, '-=15%');
+		tl.from(
+			'.project-item',
+			{ y: 100, autoAlpha: 0, stagger: 0.1, duration: 0.5, ease: 'circ.out' },
+			'-=15%'
+		);
 	});
 	onDestroy(() => {
-		tl.kill();
+		tl.revert();
 	});
 </script>
 

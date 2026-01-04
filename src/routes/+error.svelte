@@ -5,11 +5,7 @@
 
 	let mounted = $state(false);
 	onMount(() => {
-		gsap.fromTo(
-			'.reveal',
-			{ y: 150, autoAlpha: 0 },
-			{ y: 0, autoAlpha: 1, duration: 0.5, ease: 'circ.out' }
-		);
+		gsap.from('.reveal', { y: 150, autoAlpha: 0, duration: 0.5, ease: 'circ.out' });
 		mounted = true;
 	});
 </script>

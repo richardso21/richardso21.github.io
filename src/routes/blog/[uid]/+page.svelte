@@ -52,11 +52,7 @@
 
 	onMount(async () => {
 		// animate whole article into view
-		gsap.fromTo(
-			'article',
-			{ autoAlpha: 0, x: 150 },
-			{ autoAlpha: 1, x: 0, duration: 0.5, ease: 'circ.out' }
-		);
+		gsap.from('article', { autoAlpha: 0, x: 150, ease: 'circ.out', duration: 0.5 });
 
 		// count words
 		const article = document.querySelector('article');
@@ -139,6 +135,6 @@
 
 <style scoped>
 	article {
-		opacity: 0;
+		visibility: hidden;
 	}
 </style>

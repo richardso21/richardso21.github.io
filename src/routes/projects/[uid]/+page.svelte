@@ -14,40 +14,23 @@
 	const tl = gsap.timeline();
 	onMount(() => {
 		// animate title
-		tl.fromTo('.pd-title', { autoAlpha: 0 }, { autoAlpha: 1, duration: 0, ease: 'circ.out' });
+		tl.from('.pd-title', { autoAlpha: 0, duration: 0 });
 		const splitTitle = new SplitText('.pd-title', {
 			type: 'chars',
 			smartWrap: true
 		});
-		tl.fromTo(
+		tl.from(
 			splitTitle.chars,
-			{ y: 50, autoAlpha: 0 },
-			{
-				y: 0,
-				autoAlpha: 1,
-				stagger: 0.02,
-				duration: 0.5,
-				ease: 'elastic.out(1, 0.9)'
-			},
+			{ y: 50, autoAlpha: 0, stagger: 0.02, duration: 0.5, ease: 'elastic.out(1, 0.9)' },
 			0
 		);
 
 		// animate details
-		tl.fromTo(
-			'.pd-details',
-			{ x: -100, autoAlpha: 0 },
-			{ x: 0, autoAlpha: 1, duration: 0.5, ease: 'circ.out' },
-			'>-70%'
-		);
+		tl.from('.pd-details', { x: -100, autoAlpha: 0, duration: 0.5, ease: 'circ.out' }, '>-70%');
 
 		// if we're not flipping, or if we're on mobile, animate the image
 		if (!flipState.active || state.isUserMobile) {
-			tl.fromTo(
-				'.pd-img',
-				{ x: 100, autoAlpha: 0 },
-				{ x: 0, autoAlpha: 1, duration: 0.5, ease: 'circ.out' },
-				'<'
-			);
+			tl.from('.pd-img', { x: 100, autoAlpha: 0, duration: 0.5, ease: 'circ.out' }, '<');
 		} else {
 			// toggle visibility immediately for flipping to work
 			tl.to('.pd-img', { x: 0, autoAlpha: 1, duration: 0 }, 0);

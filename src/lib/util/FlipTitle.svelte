@@ -16,11 +16,7 @@
 			tl.to('.flip-title', { y: 0, autoAlpha: 1, duration: 0 });
 			tl.delay(0.5);
 		} else {
-			tl.fromTo(
-				'.flip-title',
-				{ y: 200, autoAlpha: 0 },
-				{ y: 0, autoAlpha: 1, duration: 0.5, ease: 'circ.out' }
-			);
+			tl.from('.flip-title', { y: 200, autoAlpha: 0, duration: 0.5, ease: 'circ.out' });
 		}
 	});
 </script>

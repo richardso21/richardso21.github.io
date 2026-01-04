@@ -24,7 +24,7 @@
 		tl.add(proj_list_tl, '-=20%');
 	});
 	onDestroy(() => {
-		tl.kill();
+		tl.revert();
 	});
 </script>
 

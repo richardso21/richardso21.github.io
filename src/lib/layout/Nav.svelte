@@ -31,11 +31,7 @@
 	});
 
 	onMount(() => {
-		gsap.fromTo(
-			'nav',
-			{ y: -100, autoAlpha: 0 },
-			{ y: 0, autoAlpha: 1, ease: 'circ.out', duration: 0.5 }
-		);
+		gsap.from('nav', { y: -100, autoAlpha: 0, ease: 'circ.out', duration: 0.5 });
 		mounted = true;
 	});
 
