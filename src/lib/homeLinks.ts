@@ -13,10 +13,6 @@ export const site_links: Array<LinkMetaData> = [
 		text: 'projects'
 	},
 	{
-		href: '/resume',
-		text: 'resume'
-	},
-	{
 		href: '/blog',
 		text: 'blog'
 	}
@@ -24,12 +20,16 @@ export const site_links: Array<LinkMetaData> = [
 
 export const external_links: Array<LinkMetaData> = [
 	{
+		href: 'https://richardso21.github.io/resume',
+		text: 'resume'
+	},
+	{
 		href: 'https://www.linkedin.com/in/richardso21',
-		text: 'linkedIn'
+		text: 'linkedin'
 	},
 	{
 		href: 'https://github.com/richardso21',
-		text: 'gitHub'
+		text: 'github'
 	}
 ];
 

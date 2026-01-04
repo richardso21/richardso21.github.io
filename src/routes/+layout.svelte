@@ -6,13 +6,10 @@
 	import { injectSpeedInsights } from '@vercel/speed-insights/sveltekit';
 	import { onMount } from 'svelte';
 	import { fade } from 'svelte/transition';
-	import * as THREE from 'three';
 	import { gsap } from 'gsap';
 	import { SplitText } from 'gsap/all';
 	import { Flip } from 'gsap/Flip';
 	import { isMobile } from 'is-mobile';
-	// @ts-ignore
-	import WAVES from 'vanta/dist/vanta.waves.min';
 
 	import { afterNavigate, beforeNavigate } from '$app/navigation';
 	import Nav from '$lib/layout/Nav.svelte';
@@ -22,7 +19,6 @@
 		loadFromLocalStorage,
 		saveToLocalStorage
 	} from '$lib/util/state.svelte';
-	import VantaToggle from '$lib/layout/VantaToggle.svelte';
 
 	const { data, children } = $props();
 
@@ -40,52 +36,9 @@
 	gsap.registerPlugin(Flip);
 	gsap.registerPlugin(SplitText);
 
-	// vanta-related logic
-	let usingVanta = $state(false);
-	let vantaDestroyTimeoutID: number;
-	let vantaEffect: WAVES | undefined;
-
-	const createVantaEffect = () => {
-		vantaEffect = WAVES({
-			el: '#vanta-bg',
-			color: 0x060f1f,
-			shininess: 7.5,
-			THREE: THREE
-		});
-	};
-
-	const shouldUseVanta = $derived(() => {
-		return (
-			data.pathname.match(/^(\/resume|\/blog)/) === null &&
-			internal_state.isVantaUserEnabled &&
-			!internal_state.isUserMobile // disable on mobile for performance (animations don't fully work anyway)
-		);
-	});
-
-	$effect(() => {
-		// check if we should destroy the vanta background instance
-		if (!shouldUseVanta() && usingVanta) {
-			// if entering into a page that doesn't show vanta, destroy the instance
-			usingVanta = false;
-			vantaDestroyTimeoutID = window.setTimeout(() => {
-				vantaEffect.destroy();
-				vantaEffect = undefined;
-			}, 2000); // we wait for transitions to complete before destroying
-		} else if (shouldUseVanta() && !usingVanta) {
-			usingVanta = true;
-			// recreate the effect if it was destroyed, otherwise clear the timeout to destroy it
-			vantaEffect === undefined ? createVantaEffect() : clearTimeout(vantaDestroyTimeoutID);
-		}
-	});
-
-	// init vanta effect
 	onMount(() => {
 		// check if user is using mobile device (needed for some component styling)
-		internal_state.isUserMobile = internal_state.isUserMobile ?? isMobile();
-		if (shouldUseVanta()) {
-			usingVanta = true;
-			createVantaEffect();
-		}
+		internal_state.isUserMobile = isMobile();
 	});
 
 	beforeNavigate((nav) => {
@@ -107,15 +60,6 @@
 	});
 
 	afterNavigate(() => {
-		// we need to manually trigger mousemove to update the zoom
-		if (vantaEffect !== undefined) {
-			const zoom = data.vanta_zoom();
-			vantaEffect.setOptions({ zoom });
-			setTimeout(() => {
-				vantaEffect.triggerMouseMove();
-			}, 100);
-		}
-
 		// check if we need to flip anything
 		if (flipState.active) {
 			const currFlipState = flipState.get();
@@ -133,14 +77,8 @@
 	});
 </script>
 
-<div
-	id="vanta-bg"
-	class={'fixed -z-10 h-screen w-screen transition delay-700 duration-1000 ease-in-out ' +
-		(usingVanta ? 'opacity-50' : 'opacity-0')}
-></div>
 <div class="transition-container relative overflow-hidden">
 	<Nav />
-	<VantaToggle />
 	{#key data.pathname}
 		<main
 			class="child:py-24 max-w-[100vw] px-[10vw] max-[1921px]:px-12 max-sm:px-6"
